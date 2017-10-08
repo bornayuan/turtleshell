@@ -1,26 +1,19 @@
 <?php
 /*
- * System Definitions
+ * Global Definitions
  */
 if (! defined ( 'ABSPATH' )) {
-	define ( 'ABSPATH', dirname ( __FILE__ ) . '/' );
+	define ( 'ABSPATH', dirname ( __FILE__ ) );
 }
 
 /*
- * System Version Number
+ * System Configuration Information
  */
-define( 'VERSION_NUMBER', 'V0.1.20171006' );
+require constant ( 'ABSPATH' ) . '/ts-configuration-system.php';
 
 /*
- * Database Connection Information
+ * Database Configuration Information
  */
-define ( 'DATABASE_SERVER', 'localhost' );
-define ( 'DATABASE_PORT', '3306' );
-define ( 'DATABASE_NAME', 'turtleshell' );
-define ( 'DATABASE_USERNAME', 'root' );
-define ( 'DATABASE_PASSWORD', '' );
-define ( 'DATABASE_SOCKET', null );
-define ( 'DATABASE_FLAG', null );
-
+require constant ( 'ABSPATH' ) . '/ts-configuration-database.php';
 
 ?>
