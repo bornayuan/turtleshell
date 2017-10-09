@@ -2,6 +2,8 @@
 
 namespace objectlibrary\database\entity;
 
+require constant ( 'ABSPATH' ) . '/objectlibrary/database/entity/IGenericEntity.php';
+
 /**
  *
  * @author borna
@@ -10,6 +12,7 @@ namespace objectlibrary\database\entity;
 abstract class GenericEntity implements IGenericEntity {
 	
 	/**
+	 *
 	 * @var int, primary key
 	 */
 	private $id = - 1;
@@ -17,7 +20,7 @@ abstract class GenericEntity implements IGenericEntity {
 	/**
 	 * Constructor
 	 */
-	public final function __construct() {
+	public function __construct() {
 	}
 	
 	/**
@@ -34,11 +37,9 @@ abstract class GenericEntity implements IGenericEntity {
 	 * {@inheritdoc}
 	 * @see \objectlibrary\database\entity\IGenericEntity::setId()
 	 */
-	public function setId(int $id) {
+	public function setId($id) {
 		$this->id = $id;
 	}
-	
-	
 }
 
 ?>

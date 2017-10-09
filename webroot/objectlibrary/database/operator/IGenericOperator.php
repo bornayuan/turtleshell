@@ -13,6 +13,7 @@ interface IGenericOperator {
 	 * Get operator class name.
 	 */
 	public function getName();
+
 }
 
 ?>

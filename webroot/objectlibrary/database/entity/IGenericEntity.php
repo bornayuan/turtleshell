@@ -10,16 +10,16 @@ namespace objectlibrary\database\entity;
 interface IGenericEntity {
 	
 	/**
-	 * Get primary key, int type.
-	 */
+	 * Get primary key
+	 *
 	public function getId();
 	
 	/**
-	 * Set primary key, int type.
+	 * Set primary key
 	 * 
-	 * @param int $id
+	 * @param mixed $id
 	 */
-	public function setId(int $id);
+	public function setId($id);
 }
 
 ?>

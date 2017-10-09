@@ -2,13 +2,14 @@
 
 namespace objectlibrary\database\entity;
 
+require constant ( 'ABSPATH' ) . '/objectlibrary/database/entity/GenericEntity.php';
+
 /**
  *
  * @author borna
  *        
  */
 class UserBasicEntity extends GenericEntity {
-	
 	private $firstName;
 	private $middleName;
 	private $lastName;
@@ -23,6 +24,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @return mixed
 	 */
 	public function getFirstName() {
@@ -30,6 +32,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @return mixed
 	 */
 	public function getMiddleName() {
@@ -37,6 +40,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @return mixed
 	 */
 	public function getLastName() {
@@ -44,6 +48,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @return mixed
 	 */
 	public function getNickName() {
@@ -51,6 +56,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @return mixed
 	 */
 	public function getEmail() {
@@ -58,6 +64,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @return mixed
 	 */
 	public function getUniqueIdentity() {
@@ -65,6 +72,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @param mixed $firstName
 	 */
 	public function setFirstName($firstName) {
@@ -72,6 +80,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @param mixed $middleName
 	 */
 	public function setMiddleName($middleName) {
@@ -79,6 +88,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @param mixed $lastName
 	 */
 	public function setLastName($lastName) {
@@ -86,6 +96,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @param mixed $nickName
 	 */
 	public function setNickName($nickName) {
@@ -93,6 +104,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @param mixed $email
 	 */
 	public function setEmail($email) {
@@ -100,6 +112,7 @@ class UserBasicEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
 	 * @param mixed $uniqueIdentity
 	 */
 	public function setUniqueIdentity($uniqueIdentity) {
