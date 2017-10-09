@@ -14,8 +14,9 @@ $du->beginTransaction ();
 
 $ubo = new UserBasicOperator ( $du->getDatabaseConnection () );
 $ube = new UserBasicEntity ();
-
 $ube = $ubo->loadById ( 1 );
+
+$du->endTransaction();
 
 echo $ube->getUniqueIdentity ();
 
