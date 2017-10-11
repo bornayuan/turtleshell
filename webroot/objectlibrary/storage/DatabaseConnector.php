@@ -187,18 +187,11 @@ class DatabaseConnector {
 	}
 	
 	/**
-	 * Get version number
-	 */
-	public function getVersionNumber() {
-		return 'V0.1.20171009';
-	}
-	
-	/**
 	 * Initialize
 	 *
 	 * @return boolean
 	 */
-	public function initialize() {
+	private function initialize() {
 		/*
 		 * TurtleShell uses mysqli_real_connect() for replacing mysqli_connect();
 		 */
@@ -219,7 +212,7 @@ class DatabaseConnector {
 			 * Check the result of initializaation
 			 */
 			if ($this->getDatabaseConnection () == null) {
-				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->getConnection(): Call mysqli_init() failed</font> ');
+				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->initialize(): Call mysqli_init() failed</font> ');
 				
 				/*
 				 * if the database connection cannot be initialized successfully, call exit() method.
@@ -268,7 +261,7 @@ class DatabaseConnector {
 			 * Check the result flag of connection
 			 */
 			if (! $connectionResultFlag) {
-				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->getConnection(): Connect database error: ' . mysqli_connect_error () . '</font> ');
+				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->initialize(): Connect database error: ' . mysqli_connect_error () . '</font> ');
 				mysqli_close ( $this->getDatabaseConnection () );
 				$this->setDatabaseConnection ( null );
 				
@@ -288,7 +281,7 @@ class DatabaseConnector {
 				return true;
 			}
 		} catch ( Exception $e ) {
-			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->getConnection(): Exception: ' . $e->getMessage () . '</font> ';
+			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->initialize(): Exception: ' . $e->getMessage () . '</font> ';
 			$this->setDatabaseConnection ( null );
 			return false;
 		}
@@ -298,9 +291,12 @@ class DatabaseConnector {
 	 * Begin database transaction, a new database connection will be generated everytime.
 	 */
 	public function beginTransaction() {
-		$this->initialize ();
-		$this->setDatabaseConnection ( $this->getDatabaseConnection () );
+		if($this->initialize()) {
 		mysqli_begin_transaction ( $this->getDatabaseConnection () );
+		} else {
+			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: initialize failed</font> ';
+			exit();
+		}
 	}
 	
 	/**
@@ -310,10 +306,12 @@ class DatabaseConnector {
 	 */
 	public function endTransaction() {
 		if ($this->getDatabaseConnection () == null) {
-			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->getConnection(): Error: Database connection is NULL</font> ';
+			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: Database connection is NULL</font> ';
+			$this->setDatabaseConnection ( null );
 			return false;
 		} elseif (mysqli_error ( $this->getDatabaseConnection () ) != '') {
-			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->getConnection(): Error: ' . mysqli_error ( $this->getDatabaseConnection () ) . '</font> ';
+			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: ' . mysqli_error ( $this->getDatabaseConnection () ) . '</font> ';
+			$this->setDatabaseConnection ( null );
 			return false;
 		} else {
 			try {
@@ -321,7 +319,7 @@ class DatabaseConnector {
 				return true;
 			} catch ( Exception $e ) {
 				mysqli_rollback ( $this->getDatabaseConnection () );
-				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->getConnection(): Error: ' . $e->getMessage () . '</font> ';
+				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: ' . $e->getMessage () . '</font> ';
 				return false;
 			} finally {
 				mysqli_close ( $this->getDatabaseConnection () );

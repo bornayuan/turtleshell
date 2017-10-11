@@ -17,13 +17,6 @@ interface IGenericOperator {
 	public function getOperatorName();
 	
 	/**
-	 * Set operator name
-	 *
-	 * @param string $operatorName
-	 */
-	public function setOperatorName($operatorName);
-	
-	/**
 	 * Get database connection.
 	 *
 	 * @return object, database connection

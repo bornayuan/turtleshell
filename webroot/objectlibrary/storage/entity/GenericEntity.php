@@ -2,7 +2,7 @@
 
 namespace objectlibrary\storage\entity;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/IGenericEntity.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/IGenericEntity.php';
 
 /**
  *

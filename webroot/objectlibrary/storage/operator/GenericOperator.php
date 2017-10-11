@@ -2,7 +2,7 @@
 
 namespace objectlibrary\storage\operator;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/IGenericOperator.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/IGenericOperator.php';
 
 /**
  *
@@ -35,11 +35,11 @@ abstract class GenericOperator implements IGenericOperator {
 	}
 	
 	/**
-	 *
-	 * {@inheritdoc}
-	 * @see \objectlibrary\storage\operator\IGenericOperator::setOperatorName()
+	 * Set operator name
+	 * 
+	 * @param string $operatorName
 	 */
-	public function setOperatorName($operatorName) {
+	private function setOperatorName($operatorName) {
 		$this->operatorName = $operatorName;
 	}
 	

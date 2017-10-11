@@ -2,9 +2,9 @@
 
 namespace objectlibrary\template;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Header.php';
-require constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Container.php';
-require constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Footer.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Header.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Container.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Footer.php';
 
 use objectlibrary\template\element\Container;
 use objectlibrary\template\element\Footer;

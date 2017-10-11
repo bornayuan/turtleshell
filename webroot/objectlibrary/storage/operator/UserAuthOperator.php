@@ -2,7 +2,8 @@
 
 namespace objectlibrary\storage\operator;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/UserAuthEntity.php';
 
 use objectlibrary\storage\entity\UserAuthEntity;
 
@@ -30,7 +31,7 @@ class UserAuthOperator extends GenericOperator {
 	 * @return \objectlibrary\storage\entity\UserAuthEntity
 	 */
 	public function findByUsernameAndPassword($username, $password) {
-		$sql = 'SELECT * FROM TS_USER_AUTH WHERE USERNAME=' . $username . ' AND PASSWORD=' . $password;
+		$sql = 'SELECT * FROM TS_USER_AUTH WHERE USERNAME="' . $username . '" AND PASSWORD="' . $password . '"';
 		
 		$result = mysqli_query ( $this->getDatabaseConnection (), $sql );
 		

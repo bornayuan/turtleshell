@@ -2,8 +2,8 @@
 
 namespace objectlibrary\storage\operator;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
-require constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/UserBasicEntity.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
+require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/UserBasicEntity.php';
 
 use objectlibrary\storage\entity\UserBasicEntity;
 

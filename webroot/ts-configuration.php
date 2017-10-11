@@ -9,11 +9,11 @@ if (! defined ( 'ABSPATH' )) {
 /*
  * System Configuration Information
  */
-require constant ( 'ABSPATH' ) . '/ts-configuration-system.php';
+require_once constant ( 'ABSPATH' ) . '/ts-configuration-system.php';
 
 /*
  * Database Configuration Information
  */
-require constant ( 'ABSPATH' ) . '/ts-configuration-database.php';
+require_once constant ( 'ABSPATH' ) . '/ts-configuration-database.php';
 
 ?>
