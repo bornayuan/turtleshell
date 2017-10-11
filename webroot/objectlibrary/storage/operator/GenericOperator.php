@@ -10,6 +10,14 @@ require constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/IGenericOperat
  *        
  */
 abstract class GenericOperator implements IGenericOperator {
+	
+	/**
+	 * Operator name
+	 *
+	 * @var string
+	 */
+	private $operatorName = null;
+	
 	/**
 	 * Database connection
 	 *
@@ -19,7 +27,26 @@ abstract class GenericOperator implements IGenericOperator {
 	
 	/**
 	 *
-	 * @return object, database connection
+	 * {@inheritdoc}
+	 * @see \objectlibrary\storage\operator\IGenericOperator::getOperatorName()
+	 */
+	public function getOperatorName() {
+		return $this->operatorName;
+	}
+	
+	/**
+	 *
+	 * {@inheritdoc}
+	 * @see \objectlibrary\storage\operator\IGenericOperator::setOperatorName()
+	 */
+	public function setOperatorName($operatorName) {
+		$this->operatorName = $operatorName;
+	}
+	
+	/**
+	 *
+	 * {@inheritdoc}
+	 * @see \objectlibrary\storage\operator\IGenericOperator::getDatabaseConnection()
 	 */
 	public function getDatabaseConnection() {
 		return $this->databaseConnection;
@@ -27,21 +54,23 @@ abstract class GenericOperator implements IGenericOperator {
 	
 	/**
 	 *
-	 * @param object $databaseConnection
+	 * {@inheritdoc}
+	 * @see \objectlibrary\storage\operator\IGenericOperator::setDatabaseConnection()
 	 */
 	public function setDatabaseConnection($databaseConnection) {
 		$this->databaseConnection = $databaseConnection;
 	}
 	
 	/**
-	 * Constructor
+	 * Constructor, this method must accept arguments, args[0] is $operatorName, args[1] is $databaseConnection.
 	 */
 	public function __construct() {
-		$argumentNumber = func_num_args ();
-		if ($argumentNumber == 1) {
-			$this->setDatabaseConnection ( func_get_arg ( 0 ) );
+		$argumentCountNumber = func_num_args ();
+		if ($argumentCountNumber == 2) {
+			$this->setOperatorName ( func_get_arg ( 0 ) );
+			$this->setDatabaseConnection ( func_get_arg ( 1 ) );
 		} else {
-			echo (' <font color="#FF0000">TurtleShell, GenericOperator must have argument(s) in constructor method</font> ');
+			echo (' <font color="#FF0000">TurtleShell, GenericOperator must accept argument(s) in constructor method</font> ');
 			exit ();
 		}
 	}

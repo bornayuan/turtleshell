@@ -194,11 +194,11 @@ class DatabaseConnector {
 	}
 	
 	/**
-	 * Initialize database connection
+	 * Initialize
 	 *
 	 * @return boolean
 	 */
-	public function initializeDatabaseConnection() {
+	public function initialize() {
 		/*
 		 * TurtleShell uses mysqli_real_connect() for replacing mysqli_connect();
 		 */
@@ -298,7 +298,7 @@ class DatabaseConnector {
 	 * Begin database transaction, a new database connection will be generated everytime.
 	 */
 	public function beginTransaction() {
-		$this->initializeDatabaseConnection ();
+		$this->initialize ();
 		$this->setDatabaseConnection ( $this->getDatabaseConnection () );
 		mysqli_begin_transaction ( $this->getDatabaseConnection () );
 	}
@@ -367,4 +367,3 @@ class DatabaseConnector {
 }
 
 ?>
-

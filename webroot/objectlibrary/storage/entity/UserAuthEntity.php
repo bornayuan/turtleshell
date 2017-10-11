@@ -12,72 +12,45 @@ require constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/GenericEntity.ph
 class UserAuthEntity extends GenericEntity {
 	
 	/**
-	 * Primary key of UserBasicEntity
+	 * USER_BASIC_ID, it is primary key of UserBasicEntity and the length is 11.
 	 *
-	 * @var int, lenght is 11
+	 * @var int
 	 */
 	private $userBasicId = - 1;
 	
 	/**
-	 * Username for signing in
+	 * USERNAME, length is 60.
 	 *
-	 * @var string, length is 60
+	 * @var string
 	 */
 	private $username = null;
 	
 	/**
-	 * Password for signing in
+	 * PASSWORD, length is 60.
 	 *
-	 * @var string, length is 60
+	 * @var string
 	 */
 	private $password = null;
 	
 	/**
-	 * Created Timestamp
+	 * CREATED_TIMESTAMP, it is only for displaying with format 1900-01-01 11:01:01.
 	 *
-	 * @var object, date
+	 * @var string
 	 */
 	private $createdTimestamp = null;
 	
 	/**
-	 * Updated Timestamp
+	 * UPDATED_TIMESTAMP, it is only for displaying with format 1900-01-01 11:01:01.
 	 *
-	 * @var object, date
+	 * @var string
 	 */
 	private $updatedTimestamp = null;
 	
 	/**
-	 *
-	 * @return object,
 	 */
-	public function getCreatedTimestamp() {
-		return $this->createdTimestamp;
+	public function __construct() {
+		parent::__construct ();
 	}
-	
-	/**
-	 *
-	 * @return object,
-	 */
-	public function getUpdatedTimestamp() {
-		return $this->updatedTimestamp;
-	}
-	
-	/**
-	 *
-	 * @param object, $createdTimestamp
-	 */
-	public function setCreatedTimestamp($createdTimestamp) {
-		$this->createdTimestamp = $createdTimestamp;
-	}
-	
-	/**
-	 *
-	 * @param object, $updatedTimestamp
-	 */
-	public function setUpdatedTimestamp($updatedTimestamp) {
-		$this->updatedTimestamp = $updatedTimestamp;
-	}
-	
 	/**
 	 *
 	 * @return number
@@ -100,6 +73,22 @@ class UserAuthEntity extends GenericEntity {
 	 */
 	public function getPassword() {
 		return $this->password;
+	}
+	
+	/**
+	 *
+	 * @return string
+	 */
+	public function getCreatedTimestamp() {
+		return $this->createdTimestamp;
+	}
+	
+	/**
+	 *
+	 * @return string
+	 */
+	public function getUpdatedTimestamp() {
+		return $this->updatedTimestamp;
 	}
 	
 	/**
@@ -127,9 +116,19 @@ class UserAuthEntity extends GenericEntity {
 	}
 	
 	/**
+	 *
+	 * @param string $createdTimestamp
 	 */
-	public function __construct() {
-		parent::__construct ();
+	public function setCreatedTimestamp($createdTimestamp) {
+		$this->createdTimestamp = $createdTimestamp;
+	}
+	
+	/**
+	 *
+	 * @param string $updatedTimestamp
+	 */
+	public function setUpdatedTimestamp($updatedTimestamp) {
+		$this->updatedTimestamp = $updatedTimestamp;
 	}
 }
 

@@ -11,13 +11,15 @@ interface IGenericEntity {
 	
 	/**
 	 * Get primary key
+	 * 
+	 * @return int
 	 */
 	public function getId();
 	
 	/**
 	 * Set primary key
-	 * 
-	 * @param mixed $id
+	 *
+	 * @param int $id
 	 */
 	public function setId($id);
 }

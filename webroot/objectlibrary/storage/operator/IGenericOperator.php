@@ -10,10 +10,32 @@ namespace objectlibrary\storage\operator;
 interface IGenericOperator {
 	
 	/**
-	 * Get operator class name.
+	 * Get operator name
+	 *
+	 * @return string
 	 */
-	public function getName();
-
+	public function getOperatorName();
+	
+	/**
+	 * Set operator name
+	 *
+	 * @param string $operatorName
+	 */
+	public function setOperatorName($operatorName);
+	
+	/**
+	 * Get database connection.
+	 *
+	 * @return object, database connection
+	 */
+	public function getDatabaseConnection();
+	
+	/**
+	 * Set database connection
+	 *
+	 * @param object $databaseConnection
+	 */
+	public function setDatabaseConnection($databaseConnection);
 }
 
 ?>

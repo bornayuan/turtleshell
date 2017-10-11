@@ -2,9 +2,10 @@
 
 namespace objectlibrary\storage\operator;
 
-use objectlibrary\storage\entity\UserBasicEntity;
-
 require constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
+require constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/UserBasicEntity.php';
+
+use objectlibrary\storage\entity\UserBasicEntity;
 
 /**
  *
@@ -19,7 +20,7 @@ class UserBasicOperator extends GenericOperator {
 	 * @param object $databaseConnection
 	 */
 	public function __construct($databaseConnection) {
-		parent::__construct ( $databaseConnection );
+		parent::__construct ( 'UserBasicOperator', $databaseConnection );
 	}
 	
 	/**
@@ -30,15 +31,15 @@ class UserBasicOperator extends GenericOperator {
 	 */
 	public function loadById($id) {
 		$sql = 'SELECT * FROM TS_USER_BASIC WHERE ID=' . $id;
-		// print ('SQL: ' . $sql . '</br>') ;
-		
-		$ube = new UserBasicEntity ();
 		
 		$result = mysqli_query ( $this->getDatabaseConnection (), $sql );
+		
 		if ($result) {
-			// print ('Query database successfully</br>') ;
-			
+			/*
+			 * There are results.
+			 */
 			if (mysqli_num_rows ( $result ) > 0) {
+				$ube = new UserBasicEntity ();
 				while ( $row = mysqli_fetch_assoc ( $result ) ) {
 					$ube->setId ( intval ( $row ['id'] ) );
 					$ube->setFirstName ( $row ['first_name'] );
@@ -48,25 +49,20 @@ class UserBasicOperator extends GenericOperator {
 					$ube->setEmail ( $row ['email'] );
 					$ube->setUniqueIdentity ( $row ['unique_identity'] );
 				}
-				
 				return $ube;
 			} else {
-				// print ('Do not find any data from database</br>') ;
+				/*
+				 * The result is not null/false, but its length is zero. Maybe this scenario will not be happend.
+				 */
 				return null;
 			}
 		} else {
-			// print ("Query database failed</br>") ;
+			/*
+			 * There is no result.
+			 */
 			return null;
 		}
 	}
-	
-	/**
-	 *
-	 * {@inheritdoc}
-	 * @see \objectlibrary\storage\operator\IGenericOperator::getName()
-	 */
-	public function getName() {
-		return 'UserBasicOperator';
-	}
 }
 
+?>
