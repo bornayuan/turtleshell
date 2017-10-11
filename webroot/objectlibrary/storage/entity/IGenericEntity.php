@@ -1,6 +1,6 @@
 <?php
 
-namespace objectlibrary\database\entity;
+namespace objectlibrary\storage\entity;
 
 /**
  *
@@ -11,7 +11,7 @@ interface IGenericEntity {
 	
 	/**
 	 * Get primary key
-	 *
+	 */
 	public function getId();
 	
 	/**

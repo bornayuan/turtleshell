@@ -1,15 +1,15 @@
 <?php
 require (dirname ( __FILE__ ) . '/ts-configuration.php');
 
-require (constant ( 'ABSPATH' ) . '/objectlibrary/DatabaseUtility.php');
-require (constant ( 'ABSPATH' ) . '/objectlibrary/database/operator/UserBasicOperator.php');
-require (constant ( 'ABSPATH' ) . '/objectlibrary/database/entity/UserBasicEntity.php');
+require (constant ( 'ABSPATH' ) . '/objectlibrary/storage/DatabaseConnector.php');
+require (constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/UserBasicOperator.php');
+require (constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/UserBasicEntity.php');
 
-use objectlibrary\DatabaseUtility;
-use objectlibrary\database\entity\UserBasicEntity;
-use objectlibrary\database\operator\UserBasicOperator;
+use objectlibrary\storage\DatabaseConnector;
+use objectlibrary\storage\entity\UserBasicEntity;
+use objectlibrary\storage\operator\UserBasicOperator;
 
-$du = new DatabaseUtility ();
+$du = new DatabaseConnector ();
 $du->beginTransaction ();
 
 $ubo = new UserBasicOperator ( $du->getDatabaseConnection () );

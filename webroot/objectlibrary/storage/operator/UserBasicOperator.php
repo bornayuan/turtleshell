@@ -1,11 +1,10 @@
 <?php
 
-namespace objectlibrary\database\operator;
+namespace objectlibrary\storage\operator;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/database/operator/GenericOperator.php';
+use objectlibrary\storage\entity\UserBasicEntity;
 
-use objectlibrary\database\entity\UserBasicEntity;
-use objectlibrary\DatabaseUtility;
+require constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
 
 /**
  *
@@ -26,14 +25,13 @@ class UserBasicOperator extends GenericOperator {
 	/**
 	 * Load single entity by primary key.
 	 *
-	 * @param mixed $id
-	 * @return \objectlibrary\database\entity\UserBasicEntity
+	 * @param int $id
+	 * @return \objectlibrary\storage\entity\UserBasicEntity
 	 */
 	public function loadById($id) {
 		$sql = 'SELECT * FROM TS_USER_BASIC WHERE ID=' . $id;
 		// print ('SQL: ' . $sql . '</br>') ;
 		
-		$du = new DatabaseUtility ();
 		$ube = new UserBasicEntity ();
 		
 		$result = mysqli_query ( $this->getDatabaseConnection (), $sql );
@@ -65,7 +63,7 @@ class UserBasicOperator extends GenericOperator {
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \objectlibrary\database\operator\IGenericOperator::getName()
+	 * @see \objectlibrary\storage\operator\IGenericOperator::getName()
 	 */
 	public function getName() {
 		return 'UserBasicOperator';

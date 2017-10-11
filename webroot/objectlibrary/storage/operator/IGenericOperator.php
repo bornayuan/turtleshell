@@ -1,6 +1,6 @@
 <?php
 
-namespace objectlibrary\database\operator;
+namespace objectlibrary\storage\operator;
 
 /**
  *

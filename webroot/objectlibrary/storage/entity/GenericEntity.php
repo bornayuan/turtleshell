@@ -1,8 +1,8 @@
 <?php
 
-namespace objectlibrary\database\entity;
+namespace objectlibrary\storage\entity;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/database/entity/IGenericEntity.php';
+require constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/IGenericEntity.php';
 
 /**
  *
@@ -26,7 +26,7 @@ abstract class GenericEntity implements IGenericEntity {
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \objectlibrary\database\entity\IGenericEntity::getId()
+	 * @see \objectlibrary\storage\entity\IGenericEntity::getId()
 	 */
 	public final function getId() {
 		return $this->id;
@@ -35,7 +35,7 @@ abstract class GenericEntity implements IGenericEntity {
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \objectlibrary\database\entity\IGenericEntity::setId()
+	 * @see \objectlibrary\storage\entity\IGenericEntity::setId()
 	 */
 	public function setId($id) {
 		$this->id = $id;

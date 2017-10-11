@@ -1,8 +1,8 @@
 <?php
 
-namespace objectlibrary\database\entity;
+namespace objectlibrary\storage\entity;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/database/entity/GenericEntity.php';
+require constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/GenericEntity.php';
 
 /**
  *

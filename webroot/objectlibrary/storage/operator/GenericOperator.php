@@ -1,8 +1,8 @@
 <?php
 
-namespace objectlibrary\database\operator;
+namespace objectlibrary\storage\operator;
 
-require constant ( 'ABSPATH' ) . '/objectlibrary/database/operator/IGenericOperator.php';
+require constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/IGenericOperator.php';
 
 /**
  *
