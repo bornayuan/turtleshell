@@ -11,6 +11,7 @@
 			<font size="10"><strong>TurtleShell</strong></font><br />
 			<a href="/online-test01.php">Online Test 01 (Basic Function Test)</a><br />
 			<a href="/online-test02.php">Online Test 02 (Database Function Test)</a><br />
+			<a href="/local-test.php">Local Test</a><br />
 			<a href="/sign-in.php">Sign In</a><br />
 		</p>
 	</div>

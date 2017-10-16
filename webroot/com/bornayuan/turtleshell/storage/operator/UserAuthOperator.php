@@ -2,8 +2,8 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity/UserAuthEntity.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserAuthEntity.php';
 
 use com\bornayuan\turtleshell\storage\entity\UserAuthEntity;
 
@@ -17,10 +17,10 @@ class UserAuthOperator extends GenericOperator {
 	/**
 	 * Constructor
 	 *
-	 * @param object $databaseConnection
+	 * @param \com\bornayuan\turtleshell\storage\database\DatabaseConnector $databaseConnector
 	 */
-	public function __construct($databaseConnection) {
-		parent::__construct ( 'UserAuthOperator', $databaseConnection );
+	public function __construct($databaseConnector) {
+		parent::__construct ( 'UserAuthOperator', $databaseConnector );
 	}
 	
 	/**
@@ -33,7 +33,9 @@ class UserAuthOperator extends GenericOperator {
 	public function findByUsernameAndPassword($username, $password) {
 		$sql = 'SELECT * FROM TS_USER_AUTH WHERE USERNAME="' . $username . '" AND PASSWORD="' . $password . '"';
 		
-		$result = mysqli_query ( $this->getDatabaseConnection (), $sql );
+		$this->getDatabaseConnector ()->beginTransaction ();
+		$result = mysqli_query ( $this->getDatabaseConnector ()->getDatabaseConnection (), $sql );
+		$this->getDatabaseConnector ()->endTransaction ();
 		
 		if ($result) {
 			/*

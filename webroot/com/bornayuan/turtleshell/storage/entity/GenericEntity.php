@@ -44,7 +44,7 @@ abstract class GenericEntity implements IGenericEntity {
 	 *
 	 * @param string $entityName
 	 */
-	private function setOperatorName($entityName) {
+	private function setEntityName($entityName) {
 		$this->entityName = $entityName;
 	}
 	

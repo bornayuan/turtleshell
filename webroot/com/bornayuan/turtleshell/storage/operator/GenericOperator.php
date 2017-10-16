@@ -62,12 +62,10 @@ abstract class GenericOperator implements IGenericOperator {
 	}
 	
 	/**
-	 * Constructor, this method must accept correct arguments, args[0] is $operatorName, args[1] is $databaseConnector.
-	 * 
-	 * @param
-	 *        	string
-	 * @param
-	 *        	\com\bornayuan\turtleshell\storage\database\DatabaseConnector
+	 * Constructor, this method must accept correct arguments.
+	 *
+	 * @param string $operatorName
+	 * @param \com\bornayuan\turtleshell\storage\database\DatabaseConnector $databaseConnector
 	 */
 	public function __construct() {
 		$argumentCountNumber = func_num_args ();

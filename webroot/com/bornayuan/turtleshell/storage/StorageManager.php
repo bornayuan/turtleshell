@@ -2,10 +2,11 @@
 
 namespace com\bornayuan\turtleshell\storage;
 
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/DatabaseConnector.php';
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/UserAuthOperator.php';
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/UserBasicOperator.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/database/DatabaseConnector.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/UserAuthOperator.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/UserBasicOperator.php';
 
+use com\bornayuan\turtleshell\storage\database\DatabaseConnector;
 use com\bornayuan\turtleshell\storage\operator\UserBasicOperator;
 use com\bornayuan\turtleshell\storage\operator\UserAuthOperator;
 
@@ -27,14 +28,10 @@ class StorageManager {
 	 * @param int $id
 	 * @return \com\bornayuan\turtleshell\storage\entity\UserBasicEntity
 	 */
-	public function loadUserBadic($id) {
+	public function loadUserBasic($id) {
 		$dbConnector = new DatabaseConnector ();
-
-		$dbConnector->beginTransaction ();
-		$ubOperator = new UserBasicOperator ( $dbConnector->getDatabaseConnection () );
-		$ubEntity = $ubOperator->loadById ( $id );
-		$dbConnector->endTransaction ();
-		
+		$ubOperator = new UserBasicOperator ( $dbConnector );
+		$ubEntity = $ubOperator->load ( $id );
 		return $ubEntity;
 	}
 	
@@ -43,14 +40,14 @@ class StorageManager {
 	 *
 	 * @param string $username
 	 * @param string $password,
-	 *        	the password has been encrypted before use it.
+	 *        	the password should be encrypted before use it.
 	 * @return boolean, true for sign in successfully and false is for failed.
 	 */
 	public function signIn($username, $password) {
 		/*
 		 * Call signOut() first.
 		 */
-		//$this->signOut ();
+		// $this->signOut ();
 		
 		/*
 		 * Initialize DatabaseConnector
@@ -61,8 +58,10 @@ class StorageManager {
 		 * Find UserAuthEntity by username and password
 		 */
 		$dbConnector->beginTransaction ();
-		$uaOperator = new UserAuthOperator ( $dbConnector->getDatabaseConnection () );
+		$dbConnector->setIndependentTransactionFlag ( false );
+		$uaOperator = new UserAuthOperator ( $dbConnector );
 		$uaEntity = $uaOperator->findByUsernameAndPassword ( $username, $password );
+		$dbConnector->setIndependentTransactionFlag ( true );
 		$dbConnector->endTransaction ();
 		
 		/*
@@ -74,8 +73,10 @@ class StorageManager {
 			 * Load UserBasicEntity by primary key
 			 */
 			$dbConnector->beginTransaction ();
-			$ubOperator = new UserBasicOperator ( $dbConnector->getDatabaseConnection () );
-			$ubEntity = $ubOperator->loadById ( $uaEntity->getUserBasicId () );
+			$dbConnector->setIndependentTransactionFlag ( false );
+			$ubOperator = new UserBasicOperator ( $dbConnector);
+			$ubEntity = $ubOperator->load ( $uaEntity->getUserBasicId () );
+			$dbConnector->setIndependentTransactionFlag ( true );
 			$dbConnector->endTransaction ();
 			
 			/*

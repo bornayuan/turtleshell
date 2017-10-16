@@ -2,8 +2,8 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
 
 use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
 
@@ -17,8 +17,7 @@ class UserBasicOperator extends GenericOperator {
 	/**
 	 * Constructor
 	 *
-	 * @param
-	 *        	\com\bornayuan\turtleshell\storage\database\DatabaseConnector
+	 * @param \com\bornayuan\turtleshell\storage\database\DatabaseConnector $databaseConnector
 	 */
 	public function __construct($databaseConnector) {
 		parent::__construct ( 'UserBasicOperator', $databaseConnector );

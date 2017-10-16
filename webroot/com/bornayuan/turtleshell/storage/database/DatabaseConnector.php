@@ -10,108 +10,127 @@ use Exception;
  *        
  */
 class DatabaseConnector {
-	/*
-	 * Database configuration
+	
+	/**
+	 * Database server
+	 *
+	 * @var string
 	 */
 	private $databaseServer = null;
-	private $databasePort = null;
-	private $databaseName = null;
-	private $databaseUsername = null;
-	private $databasePassword = null;
-	private $databaseCharset = null;
-	private $databaseSocket = null;
-	private $databaseFlag = null;
 	
-	/*
+	/**
+	 * Database port
+	 *
+	 * @var int, MySQL default port is 3306.
+	 */
+	private $databasePort = 3306;
+	
+	/**
+	 * Database name
+	 *
+	 * @var string
+	 */
+	private $databaseName = null;
+	
+	/**
+	 * Database username
+	 *
+	 * @var string
+	 */
+	private $databaseUsername = null;
+	
+	/**
+	 * Database password
+	 *
+	 * @var string
+	 */
+	private $databasePassword = null;
+	
+	/**
+	 * Database charset
+	 *
+	 * @var string
+	 */
+	private $databaseCharset = null;
+	
+	/**
+	 * Database socket
+	 *
+	 * @var string
+	 */
+	private $databaseSocket = null;
+	
+	/**
+	 * Database connection client falg
+	 * MYSQLI_CLIENT_COMPRESS
+	 * MYSQLI_CLIENT_FOUND_ROWS
+	 * MYSQLI_CLIENT_IGNORE_SPACE
+	 * MYSQLI_CLIENT_INTERACTIVE
+	 * MYSQLI_CLIENT_LOCAL_FILES
+	 * MYSQLI_CLIENT_MULTI_STATEMENTS
+	 * MYSQLI_CLIENT_MULTI_RESULTS
+	 * MYSQLI_CLIENT_NO_SCHEMA
+	 * MYSQLI_CLIENT_ODBC
+	 * MYSQLI_CLIENT_SSL
+	 *
+	 * @var int, MySQL connection client flag default value is 0.
+	 */
+	private $databaseFlag = 0;
+	
+	/**
 	 * Database connection
+	 *
+	 * @var resource
 	 */
 	private $databaseConnection = null;
 	
 	/**
-	 * This boolean flag will be checked in method beginTransaction().
+	 * This flag will be checked in method beginTransaction().
 	 *
-	 * @var boolean, true value is for generating new connection and transaction, false value is for using existing connection, but anyway the connection will be generated if the current connection is null.
+	 * @var bool, true value is for managing the transaction in this class, false value means the transaction has been managed by caller, and anyway the connection will be generated if the current connection is null.
 	 */
 	private $independentTransactionFlag = true;
 	
 	/**
+	 * Constructor, initialize necessary variables.
 	 *
-	 * @return boolean
+	 * @param bool $independentTransactionFlag[optional]
+	 * @param resource $databaseConnection[optional]
 	 */
-	public function getIndependentTransactionFlag() {
-		return $this->independentTransactionFlag;
-	}
-	
-	/**
-	 *
-	 * @param boolean, $independentTransactionFlag
-	 */
-	private function setIndependentTransactionFlag($independentTransactionFlag) {
-		$this->independentTransactionFlag = $independentTransactionFlag;
-	}
-	
-	/**
-	 *
-	 * @return object
-	 */
-	public function getDatabaseConnection() {
-		return $this->databaseConnection;
-	}
-	
-	/**
-	 *
-	 * @param object $databaseConnection
-	 */
-	public function setDatabaseConnection($databaseConnection) {
-		$this->databaseConnection = $databaseConnection;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDatabaseSocket() {
-		return $this->databaseSocket;
-	}
-	
-	/**
-	 *
-	 * @param string $databaseSocket
-	 */
-	public function setDatabaseSocket($databaseSocket) {
-		$this->databaseSocket = $databaseSocket;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDatabaseFlag() {
-		return $this->databaseFlag;
-	}
-	
-	/**
-	 *
-	 * @param string $databaseFlag
-	 */
-	public function setDatabaseFlag($databaseFlag) {
-		$this->databaseFlag = $databaseFlag;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDatabaseCharset() {
-		return $this->databaseCharset;
-	}
-	
-	/**
-	 *
-	 * @param string $databaseCharset
-	 */
-	public function setDatabaseCharset($databaseCharset) {
-		$this->databaseCharset = $databaseCharset;
+	public function __construct() {
+		/*
+		 * Initialize database configuration with default values.
+		 */
+		$this->setDatabaseServer ( DATABASE_SERVER );
+		$this->setDatabasePort ( DATABASE_PORT );
+		$this->setDatabaseName ( DATABASE_NAME );
+		$this->setDatabaseUsername ( DATABASE_USERNAME );
+		$this->setDatabasePassword ( DATABASE_PASSWORD );
+		$this->setDatabaseCharset ( DATABASE_CHARSET );
+		
+		/*
+		 * Check the argument(s)
+		 */
+		$argumentCountNumber = func_num_args ();
+		if ($argumentCountNumber == 0) {
+			// do nothing...
+		} elseif ($argumentCountNumber == 1) {
+			$this->setIndependentTransactionFlag ( func_get_arg ( 0 ) );
+			if (! $this->getIndependentTransactionFlag ()) {
+				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->__construct(): Error: Database connection parameter is necessary, if transaction is not independent.</font> ');
+				exit ();
+			}
+		} elseif ($argumentCountNumber == 2) {
+			$this->setIndependentTransactionFlag ( func_get_arg ( 0 ) );
+			if ($this->getIndependentTransactionFlag ()) {
+				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->__construct(): Error: Database connection parameter is not necessary, if transaction is independent.</font> ');
+				exit ();
+			}
+			$this->setDatabaseConnection ( func_get_arg ( 1 ) );
+		} else {
+			echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->__construct(): Error: Incorrect argument(s).</font> ');
+			exit ();
+		}
 	}
 	
 	/**
@@ -124,7 +143,7 @@ class DatabaseConnector {
 	
 	/**
 	 *
-	 * @return string
+	 * @return int
 	 */
 	public function getDatabasePort() {
 		return $this->databasePort;
@@ -156,6 +175,46 @@ class DatabaseConnector {
 	
 	/**
 	 *
+	 * @return string
+	 */
+	public function getDatabaseCharset() {
+		return $this->databaseCharset;
+	}
+	
+	/**
+	 *
+	 * @return string
+	 */
+	public function getDatabaseSocket() {
+		return $this->databaseSocket;
+	}
+	
+	/**
+	 *
+	 * @return int
+	 */
+	public function getDatabaseFlag() {
+		return $this->databaseFlag;
+	}
+	
+	/**
+	 *
+	 * @return resource
+	 */
+	public function getDatabaseConnection() {
+		return $this->databaseConnection;
+	}
+	
+	/**
+	 *
+	 * @return bool
+	 */
+	public function getIndependentTransactionFlag() {
+		return $this->independentTransactionFlag;
+	}
+	
+	/**
+	 *
 	 * @param string $databaseServer
 	 */
 	public function setDatabaseServer($databaseServer) {
@@ -164,7 +223,7 @@ class DatabaseConnector {
 	
 	/**
 	 *
-	 * @param string $databasePort
+	 * @param int $databasePort
 	 */
 	public function setDatabasePort($databasePort) {
 		$this->databasePort = $databasePort;
@@ -195,32 +254,49 @@ class DatabaseConnector {
 	}
 	
 	/**
-	 * Constructor, initialize necessary variables.
+	 *
+	 * @param string $databaseCharset
 	 */
-	public function __construct() {
-		/*
-		 * Initialize database configuration with default values.
-		 */
-		$this->setDatabaseServer ( constant ( 'DATABASE_SERVER' ) );
-		$this->setDatabasePort ( constant ( 'DATABASE_PORT' ) );
-		$this->setDatabaseName ( constant ( 'DATABASE_NAME' ) );
-		$this->setDatabaseUsername ( constant ( 'DATABASE_USERNAME' ) );
-		$this->setDatabasePassword ( constant ( 'DATABASE_PASSWORD' ) );
-		$this->setDatabaseCharset ( constant ( 'DATABASE_CHARSET' ) );
-		
-		/*
-		 * Check the argument(s)
-		 */
-		$argumentCountNumber = func_num_args ();
-		if ($argumentCountNumber == 1) {
-			$this->setIndependentTransactionFlag ( func_get_arg ( 0 ) );
-		}
+	public function setDatabaseCharset($databaseCharset) {
+		$this->databaseCharset = $databaseCharset;
+	}
+	
+	/**
+	 *
+	 * @param string $databaseSocket
+	 */
+	public function setDatabaseSocket($databaseSocket) {
+		$this->databaseSocket = $databaseSocket;
+	}
+	
+	/**
+	 *
+	 * @param int $databaseFlag
+	 */
+	public function setDatabaseFlag($databaseFlag) {
+		$this->databaseFlag = $databaseFlag;
+	}
+	
+	/**
+	 *
+	 * @param resource $databaseConnection
+	 */
+	public function setDatabaseConnection($databaseConnection) {
+		$this->databaseConnection = $databaseConnection;
+	}
+	
+	/**
+	 *
+	 * @param bool $independentTransactionFlag
+	 */
+	public function setIndependentTransactionFlag($independentTransactionFlag) {
+		$this->independentTransactionFlag = $independentTransactionFlag;
 	}
 	
 	/**
 	 * Generate database connection
 	 *
-	 * @return boolean, true is for generating database connection successfully, and false is for faild.
+	 * @return bool, true is for generating database connection successfully, and false is for faild.
 	 */
 	private function connect() {
 		/*
@@ -323,34 +399,34 @@ class DatabaseConnector {
 	 */
 	public function beginTransaction() {
 		/*
-		 * New database connection will be forced generation if $independentTransactionFlag is true.
-		 * And new database connection will be also generated if current database connection is null.
+		 * Check $independentTransactionFlag
 		 */
 		if ($this->getIndependentTransactionFlag ()) {
 			/*
 			 * $independentTransactionFlag = true
+			 *
+			 * Connect database and generate a new connection.
 			 */
 			if (! $this->connect ()) {
-				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: initialize failed</font> ';
+				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: connect database failed</font> ';
 				exit ();
 			}
+			
+			/*
+			 * Begin transaction
+			 */
+			mysqli_begin_transaction ( $this->getDatabaseConnection () );
 		} else {
 			/*
 			 * $independentTransactionFlag = false
-			 * And new database connection will be generated if current database connection is null.
+			 *
+			 * The database connection must be ready
 			 */
 			if ($this->getDatabaseConnection () == null) {
-				if (! $this->connect ()) {
-					echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: initialize failed</font> ';
-					exit ();
-				}
+				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: Database connection should not be null, if transaction is independent.</font> ';
+				exit ();
 			}
 		}
-		
-		/*
-		 * Begin transaction
-		 */
-		mysqli_begin_transaction ( $this->getDatabaseConnection () );
 	}
 	
 	/**
@@ -368,7 +444,7 @@ class DatabaseConnector {
 			 * try to commit
 			 */
 			if ($this->getDatabaseConnection () == null) {
-				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: Database connection is NULL</font> ';
+				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: Database connection is null.</font> ';
 				$this->setDatabaseConnection ( null );
 				return false;
 			} elseif (mysqli_error ( $this->getDatabaseConnection () ) != '') {

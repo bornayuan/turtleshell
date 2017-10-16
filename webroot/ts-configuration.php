@@ -1,6 +1,7 @@
 <?php
+
 /*
- * Global Definitions
+ * Abstract path definition
  */
 if (! defined ( 'ABSPATH' )) {
 	define ( 'ABSPATH', dirname ( __FILE__ ) );
@@ -9,11 +10,11 @@ if (! defined ( 'ABSPATH' )) {
 /*
  * System Configuration Information
  */
-require_once constant ( 'ABSPATH' ) . '/ts-configuration-system.php';
+require_once ABSPATH . '/ts-configuration-system.php';
 
 /*
  * Database Configuration Information
  */
-require_once constant ( 'ABSPATH' ) . '/ts-configuration-database.php';
+require_once ABSPATH . '/ts-configuration-database.php';
 
 ?>
