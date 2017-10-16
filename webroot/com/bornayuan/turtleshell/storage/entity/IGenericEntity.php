@@ -1,6 +1,6 @@
 <?php
 
-namespace objectlibrary\storage\entity;
+namespace com\bornayuan\turtleshell\storage\entity;
 
 /**
  *

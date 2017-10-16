@@ -1,8 +1,8 @@
 <?php
 
-namespace objectlibrary\storage\operator;
+namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/IGenericOperator.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/IGenericOperator.php';
 
 /**
  *
@@ -28,7 +28,7 @@ abstract class GenericOperator implements IGenericOperator {
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \objectlibrary\storage\operator\IGenericOperator::getOperatorName()
+	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::getOperatorName()
 	 */
 	public function getOperatorName() {
 		return $this->operatorName;
@@ -46,7 +46,7 @@ abstract class GenericOperator implements IGenericOperator {
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \objectlibrary\storage\operator\IGenericOperator::getDatabaseConnection()
+	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::getDatabaseConnection()
 	 */
 	public function getDatabaseConnection() {
 		return $this->databaseConnection;
@@ -55,7 +55,7 @@ abstract class GenericOperator implements IGenericOperator {
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \objectlibrary\storage\operator\IGenericOperator::setDatabaseConnection()
+	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::setDatabaseConnection()
 	 */
 	public function setDatabaseConnection($databaseConnection) {
 		$this->databaseConnection = $databaseConnection;

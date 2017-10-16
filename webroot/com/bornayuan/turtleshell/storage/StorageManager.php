@@ -1,13 +1,13 @@
 <?php
 
-namespace objectlibrary\storage;
+namespace com\bornayuan\turtleshell\storage;
 
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/DatabaseConnector.php';
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/UserAuthOperator.php';
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/UserBasicOperator.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/DatabaseConnector.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/UserAuthOperator.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/UserBasicOperator.php';
 
-use objectlibrary\storage\operator\UserBasicOperator;
-use objectlibrary\storage\operator\UserAuthOperator;
+use com\bornayuan\turtleshell\storage\operator\UserBasicOperator;
+use com\bornayuan\turtleshell\storage\operator\UserAuthOperator;
 
 /**
  *
@@ -25,7 +25,7 @@ class StorageManager {
 	 * Load UserBasicEntity by id which is primary key
 	 *
 	 * @param int $id
-	 * @return \objectlibrary\storage\entity\UserBasicEntity
+	 * @return \com\bornayuan\turtleshell\storage\entity\UserBasicEntity
 	 */
 	public function loadUserBadic($id) {
 		$dbConnector = new DatabaseConnector ();

@@ -1,8 +1,8 @@
 <?php
 
-namespace objectlibrary\storage\entity;
+namespace com\bornayuan\turtleshell\storage\entity;
 
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/GenericEntity.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity/GenericEntity.php';
 
 /**
  *

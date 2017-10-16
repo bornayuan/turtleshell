@@ -1,11 +1,11 @@
 <?php
 
-namespace objectlibrary\storage\operator;
+namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/UserBasicEntity.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
 
-use objectlibrary\storage\entity\UserBasicEntity;
+use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
 
 /**
  *
@@ -25,7 +25,7 @@ class UserBasicOperator extends GenericOperator {
 	
 	/**
 	 * Create UserBasicEntity,
-	 * @return \objectlibrary\storage\entity\UserBasicEntity
+	 * @return \com\bornayuan\turtleshell\storage\entity\UserBasicEntity
 	 */
 	public function create($ubEntity) {
 		$sql = '';
@@ -40,7 +40,7 @@ class UserBasicOperator extends GenericOperator {
 	 * Load single entity by primary key.
 	 *
 	 * @param int $id
-	 * @return \objectlibrary\storage\entity\UserBasicEntity
+	 * @return \com\bornayuan\turtleshell\storage\entity\UserBasicEntity
 	 */
 	public function loadById($id) {
 		$sql = 'SELECT * FROM TS_USER_BASIC WHERE ID=' . $id;

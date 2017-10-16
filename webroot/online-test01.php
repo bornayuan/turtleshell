@@ -1,5 +1,5 @@
 <?php
 require (dirname ( __FILE__ ) . '/ts-configuration.php');
 
-print ('Hello World!');
+print ('TurtleShell Online Test 01') ;
 ?>

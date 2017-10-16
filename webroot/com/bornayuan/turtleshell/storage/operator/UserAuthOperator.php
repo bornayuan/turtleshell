@@ -1,11 +1,11 @@
 <?php
 
-namespace objectlibrary\storage\operator;
+namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/operator/GenericOperator.php';
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/entity/UserAuthEntity.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity/UserAuthEntity.php';
 
-use objectlibrary\storage\entity\UserAuthEntity;
+use com\bornayuan\turtleshell\storage\entity\UserAuthEntity;
 
 /**
  *
@@ -28,7 +28,7 @@ class UserAuthOperator extends GenericOperator {
 	 *
 	 * @param string $username
 	 * @param string $password
-	 * @return \objectlibrary\storage\entity\UserAuthEntity
+	 * @return \com\bornayuan\turtleshell\storage\entity\UserAuthEntity
 	 */
 	public function findByUsernameAndPassword($username, $password) {
 		$sql = 'SELECT * FROM TS_USER_AUTH WHERE USERNAME="' . $username . '" AND PASSWORD="' . $password . '"';

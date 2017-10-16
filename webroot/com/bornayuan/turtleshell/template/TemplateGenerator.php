@@ -1,14 +1,14 @@
 <?php
 
-namespace objectlibrary\template;
+namespace com\bornayuan\turtleshell\template;
 
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Header.php';
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Container.php';
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/template/element/Footer.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/template/element/Header.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/template/element/Container.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/template/element/Footer.php';
 
-use objectlibrary\template\element\Container;
-use objectlibrary\template\element\Footer;
-use objectlibrary\template\element\Header;
+use com\bornayuan\turtleshell\template\element\Container;
+use com\bornayuan\turtleshell\template\element\Footer;
+use com\bornayuan\turtleshell\template\element\Header;
 
 /**
  *

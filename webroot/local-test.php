@@ -1,8 +1,8 @@
 <?php
 require_once (dirname ( __FILE__ ) . '/ts-configuration.php');
-require_once constant ( 'ABSPATH' ) . '/objectlibrary/storage/StorageManager.php';
+require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/StorageManager.php';
 
-use objectlibrary\storage\StorageManager;
+use com\bornayuan\turtleshell\storage\StorageManager;
 
 $storage = new StorageManager ();
 $ubEntity = $storage->loadUserBadic ( 1 );

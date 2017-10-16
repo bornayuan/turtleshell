@@ -21,7 +21,7 @@ const TS__SESSION__SIGN_IN = 'TS__SESSION__SIGN_IN';
 
 /**
  * UserBasicEntity will be assigned once sign in operation is successful.
- * @var \objectlibrary\storage\entity\UserBasicEntity
+ * @var \com\bornayuan\turtleshell\storage\entity\UserBasicEntity
  */
 global $SIGNED_USER_BASIC;
 
