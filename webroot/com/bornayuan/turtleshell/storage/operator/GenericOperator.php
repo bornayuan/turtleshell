@@ -19,11 +19,11 @@ abstract class GenericOperator implements IGenericOperator {
 	private $operatorName = null;
 	
 	/**
-	 * Database connection
+	 * DatabaseConnector
 	 *
-	 * @var object
+	 * @var \com\bornayuan\turtleshell\storage\database\DatabaseConnector
 	 */
-	private $databaseConnection = null;
+	private $databaseConnector = null;
 	
 	/**
 	 *
@@ -36,7 +36,7 @@ abstract class GenericOperator implements IGenericOperator {
 	
 	/**
 	 * Set operator name
-	 * 
+	 *
 	 * @param string $operatorName
 	 */
 	private function setOperatorName($operatorName) {
@@ -46,31 +46,36 @@ abstract class GenericOperator implements IGenericOperator {
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::getDatabaseConnection()
+	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::getDatabaseConnector()
 	 */
-	public function getDatabaseConnection() {
-		return $this->databaseConnection;
+	public function getDatabaseConnector() {
+		return $this->databaseConnector;
 	}
 	
 	/**
 	 *
 	 * {@inheritdoc}
-	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::setDatabaseConnection()
+	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::setDatabaseConnector()
 	 */
-	public function setDatabaseConnection($databaseConnection) {
-		$this->databaseConnection = $databaseConnection;
+	public function setDatabaseConnector($databaseConnector) {
+		$this->databaseConnector = $databaseConnector;
 	}
 	
 	/**
-	 * Constructor, this method must accept arguments, args[0] is $operatorName, args[1] is $databaseConnection.
+	 * Constructor, this method must accept correct arguments, args[0] is $operatorName, args[1] is $databaseConnector.
+	 * 
+	 * @param
+	 *        	string
+	 * @param
+	 *        	\com\bornayuan\turtleshell\storage\database\DatabaseConnector
 	 */
 	public function __construct() {
 		$argumentCountNumber = func_num_args ();
 		if ($argumentCountNumber == 2) {
 			$this->setOperatorName ( func_get_arg ( 0 ) );
-			$this->setDatabaseConnection ( func_get_arg ( 1 ) );
+			$this->setDatabaseConnector ( func_get_arg ( 1 ) );
 		} else {
-			echo (' <font color="#FF0000">TurtleShell, GenericOperator must accept argument(s) in constructor method</font> ');
+			echo (' <font color="#FF0000">TurtleShell, GenericOperator must accept correct argument(s) in constructor method</font> ');
 			exit ();
 		}
 	}

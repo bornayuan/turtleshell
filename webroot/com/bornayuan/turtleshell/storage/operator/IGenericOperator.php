@@ -17,18 +17,18 @@ interface IGenericOperator {
 	public function getOperatorName();
 	
 	/**
-	 * Get database connection.
+	 * Get DatabaseConnector.
 	 *
-	 * @return object, database connection
+	 * @return \com\bornayuan\turtleshell\storage\database\DatabaseConnector
 	 */
-	public function getDatabaseConnection();
+	public function getDatabaseConnector();
 	
 	/**
-	 * Set database connection
+	 * Set DatabaseConnector
 	 *
-	 * @param object $databaseConnection
+	 * @param \com\bornayuan\turtleshell\storage\database\DatabaseConnector
 	 */
-	public function setDatabaseConnection($databaseConnection);
+	public function setDatabaseConnector($databaseConnector);
 }
 
 ?>

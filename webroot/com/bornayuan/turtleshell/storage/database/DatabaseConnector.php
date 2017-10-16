@@ -1,6 +1,6 @@
 <?php
 
-namespace com\bornayuan\turtleshell\storage;
+namespace com\bornayuan\turtleshell\storage\database;
 
 use Exception;
 
@@ -26,6 +26,29 @@ class DatabaseConnector {
 	 * Database connection
 	 */
 	private $databaseConnection = null;
+	
+	/**
+	 * This boolean flag will be checked in method beginTransaction().
+	 *
+	 * @var boolean, true value is for generating new connection and transaction, false value is for using existing connection, but anyway the connection will be generated if the current connection is null.
+	 */
+	private $independentTransactionFlag = true;
+	
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function getIndependentTransactionFlag() {
+		return $this->independentTransactionFlag;
+	}
+	
+	/**
+	 *
+	 * @param boolean, $independentTransactionFlag
+	 */
+	private function setIndependentTransactionFlag($independentTransactionFlag) {
+		$this->independentTransactionFlag = $independentTransactionFlag;
+	}
 	
 	/**
 	 *
@@ -172,11 +195,11 @@ class DatabaseConnector {
 	}
 	
 	/**
-	 * Construct method, initialize necessary variables.
+	 * Constructor, initialize necessary variables.
 	 */
 	public function __construct() {
 		/*
-		 * Get database configuration information
+		 * Initialize database configuration with default values.
 		 */
 		$this->setDatabaseServer ( constant ( 'DATABASE_SERVER' ) );
 		$this->setDatabasePort ( constant ( 'DATABASE_PORT' ) );
@@ -184,14 +207,22 @@ class DatabaseConnector {
 		$this->setDatabaseUsername ( constant ( 'DATABASE_USERNAME' ) );
 		$this->setDatabasePassword ( constant ( 'DATABASE_PASSWORD' ) );
 		$this->setDatabaseCharset ( constant ( 'DATABASE_CHARSET' ) );
+		
+		/*
+		 * Check the argument(s)
+		 */
+		$argumentCountNumber = func_num_args ();
+		if ($argumentCountNumber == 1) {
+			$this->setIndependentTransactionFlag ( func_get_arg ( 0 ) );
+		}
 	}
 	
 	/**
-	 * Initialize
+	 * Generate database connection
 	 *
-	 * @return boolean
+	 * @return boolean, true is for generating database connection successfully, and false is for faild.
 	 */
-	private function initialize() {
+	private function connect() {
 		/*
 		 * TurtleShell uses mysqli_real_connect() for replacing mysqli_connect();
 		 */
@@ -212,7 +243,7 @@ class DatabaseConnector {
 			 * Check the result of initializaation
 			 */
 			if ($this->getDatabaseConnection () == null) {
-				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->initialize(): Call mysqli_init() failed</font> ');
+				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->connect(): Call mysqli_init() failed</font> ');
 				
 				/*
 				 * if the database connection cannot be initialized successfully, call exit() method.
@@ -261,7 +292,7 @@ class DatabaseConnector {
 			 * Check the result flag of connection
 			 */
 			if (! $connectionResultFlag) {
-				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->initialize(): Connect database error: ' . mysqli_connect_error () . '</font> ');
+				echo (' <font color="#FF0000">TurtleShell, DatabaseConnector->connect(): Connect database error: ' . mysqli_connect_error () . '</font> ');
 				mysqli_close ( $this->getDatabaseConnection () );
 				$this->setDatabaseConnection ( null );
 				
@@ -281,22 +312,45 @@ class DatabaseConnector {
 				return true;
 			}
 		} catch ( Exception $e ) {
-			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->initialize(): Exception: ' . $e->getMessage () . '</font> ';
+			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->connect(): Exception: ' . $e->getMessage () . '</font> ';
 			$this->setDatabaseConnection ( null );
 			return false;
 		}
 	}
 	
 	/**
-	 * Begin database transaction, a new database connection will be generated everytime.
+	 * Begin transaction, and it will check $independentTransactionFlag.
 	 */
 	public function beginTransaction() {
-		if($this->initialize()) {
-		mysqli_begin_transaction ( $this->getDatabaseConnection () );
+		/*
+		 * New database connection will be forced generation if $independentTransactionFlag is true.
+		 * And new database connection will be also generated if current database connection is null.
+		 */
+		if ($this->getIndependentTransactionFlag ()) {
+			/*
+			 * $independentTransactionFlag = true
+			 */
+			if (! $this->connect ()) {
+				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: initialize failed</font> ';
+				exit ();
+			}
 		} else {
-			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: initialize failed</font> ';
-			exit();
+			/*
+			 * $independentTransactionFlag = false
+			 * And new database connection will be generated if current database connection is null.
+			 */
+			if ($this->getDatabaseConnection () == null) {
+				if (! $this->connect ()) {
+					echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->beginTransaction(): Error: initialize failed</font> ';
+					exit ();
+				}
+			}
 		}
+		
+		/*
+		 * Begin transaction
+		 */
+		mysqli_begin_transaction ( $this->getDatabaseConnection () );
 	}
 	
 	/**
@@ -305,28 +359,45 @@ class DatabaseConnector {
 	 * @return boolean
 	 */
 	public function endTransaction() {
-		if ($this->getDatabaseConnection () == null) {
-			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: Database connection is NULL</font> ';
-			$this->setDatabaseConnection ( null );
-			return false;
-		} elseif (mysqli_error ( $this->getDatabaseConnection () ) != '') {
-			echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: ' . mysqli_error ( $this->getDatabaseConnection () ) . '</font> ';
-			$this->setDatabaseConnection ( null );
-			return false;
-		} else {
-			try {
-				mysqli_commit ( $this->getDatabaseConnection () );
-				return true;
-			} catch ( Exception $e ) {
-				mysqli_rollback ( $this->getDatabaseConnection () );
-				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: ' . $e->getMessage () . '</font> ';
-				return false;
-			} finally {
-				mysqli_close ( $this->getDatabaseConnection () );
+		/*
+		 * $independentTransactionFlag = true, commit
+		 * $independentTransactionFlag = false, do nothing
+		 */
+		if ($this->getIndependentTransactionFlag ()) {
+			/*
+			 * try to commit
+			 */
+			if ($this->getDatabaseConnection () == null) {
+				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: Database connection is NULL</font> ';
 				$this->setDatabaseConnection ( null );
+				return false;
+			} elseif (mysqli_error ( $this->getDatabaseConnection () ) != '') {
+				echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: ' . mysqli_error ( $this->getDatabaseConnection () ) . '</font> ';
+				$this->setDatabaseConnection ( null );
+				return false;
+			} else {
+				try {
+					mysqli_commit ( $this->getDatabaseConnection () );
+					return true;
+				} catch ( Exception $e ) {
+					mysqli_rollback ( $this->getDatabaseConnection () );
+					echo ' <font color="#FF0000">TurtleShell, DatabaseConnector->endTransaction(): Error: ' . $e->getMessage () . '</font> ';
+					return false;
+				} finally {
+					mysqli_close ( $this->getDatabaseConnection () );
+					$this->setDatabaseConnection ( null );
+				}
 			}
+		} else {
+			/*
+			 * do nothing
+			 */
 		}
 	}
+	
+	/**
+	 * Test purpose
+	 */
 	public function sqlInjectionDefense() {
 		
 		/*
