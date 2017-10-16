@@ -24,6 +24,19 @@ class UserBasicOperator extends GenericOperator {
 	}
 	
 	/**
+	 * Create UserBasicEntity,
+	 * @return \objectlibrary\storage\entity\UserBasicEntity
+	 */
+	public function create($ubEntity) {
+		$sql = '';
+		
+		// $ubEntity = new UserBasicEntity();
+		
+		
+		return $ubEntity;
+	}
+	
+	/**
 	 * Load single entity by primary key.
 	 *
 	 * @param int $id
