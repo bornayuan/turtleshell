@@ -11,6 +11,21 @@ require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity
  */
 class UserBasicEntity extends GenericEntity {
 	/**
+	 * Column names of tale TS_USER_BASIC
+	 *
+	 * @var array
+	 */
+	public static $COLUMNS = array (
+			'id' => 'ID',
+			'firstName' => 'FIRST_NAME',
+			'middleName' => 'MIDDLE_NAME',
+			'lastName' => 'LAST_NAME',
+			'nickName' => 'NICK_NAME',
+			'email' => 'EMAIL',
+			'uniqueIdentity' => 'UNIQUE_IDENTITY'
+	);
+	
+	/**
 	 * FIRST_NAME, length is 60.
 	 *
 	 * @var string

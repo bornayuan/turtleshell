@@ -2,9 +2,11 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/StorageUtitlity.php';
 require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
 require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
 
+use com\bornayuan\turtleshell\storage\StorageUtility;
 use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
 
 /**
@@ -83,6 +85,67 @@ class UserBasicOperator extends GenericOperator {
 			echo (' <font color="#FF0000">TurtleShell, UserBasicOperator->load(): Warning: cannot find any result!</font> ');
 			return null;
 		}
+	}
+	
+	/**
+	 * Find UserBasicEntity by mutiple conditions.
+	 *
+	 * @param string $parameters
+	 * @return array UserBasicEntities
+	 *        
+	 */
+	public function find($parameters) {
+		$condition = $this->parseParameters ( $parameters );
+		$sql = 'SELECT * FROM TS_USER_BASIC WHERE 1=1 ' . $condition;
+		
+		$this->getDatabaseConnector ()->beginTransaction ();
+		$result = mysqli_query ( $this->getDatabaseConnector ()->getDatabaseConnection (), $sql );
+		$this->getDatabaseConnector ()->endTransaction ();
+		
+		$ubEntities = array ();
+		
+		if ($result) {
+			/*
+			 * There are results
+			 */
+			if (mysqli_num_rows ( $result ) > 0) {
+				$ubEntity = new UserBasicEntity ();
+				while ( $row = mysqli_fetch_assoc ( $result ) ) {
+					$ubEntity->setId ( intval ( $row ['ID'] ) );
+					$ubEntity->setFirstName ( $row ['FIRST_NAME'] );
+					$ubEntity->setMiddleName ( $row ['MIDDLE_NAME'] );
+					$ubEntity->setLastName ( $row ['LAST_NAME'] );
+					$ubEntity->setNickName ( $row ['NICK_NAME'] );
+					$ubEntity->setEmail ( $row ['EMAIL'] );
+					$ubEntity->setUniqueIdentity ( $row ['UNIQUE_IDENTITY'] );
+					
+					$ubEntities [] = $ubEntity;
+				}
+				
+				return $ubEntities;
+			} else {
+				/*
+				 * The result is not null/false, but its length is zero. Maybe this scenario will not be happend.
+				 */
+				return null;
+			}
+		} else {
+			/*
+			 * There is no result.
+			 */
+			return null;
+		}
+	}
+	
+	/**
+	 * Parse parameters array to SQL string
+	 *
+	 * @param array $parameters
+	 * @return string parsed SQL condition
+	 */
+	private function parseParameters($parameters) {
+		$condition = StorageUtility::parseParametersWithColumns ( $parameters, UserBasicEntity::$COLUMNS );
+		return $condition;
 	}
 }
 

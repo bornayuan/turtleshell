@@ -26,6 +26,23 @@ abstract class GenericOperator implements IGenericOperator {
 	private $databaseConnector = null;
 	
 	/**
+	 * Constructor, this method must accept correct arguments.
+	 *
+	 * @param string $operatorName
+	 * @param \com\bornayuan\turtleshell\storage\database\DatabaseConnector $databaseConnector
+	 */
+	public function __construct() {
+		$argumentCountNumber = func_num_args ();
+		if ($argumentCountNumber == 2) {
+			$this->setOperatorName ( func_get_arg ( 0 ) );
+			$this->setDatabaseConnector ( func_get_arg ( 1 ) );
+		} else {
+			echo (' <font color="#FF0000">TurtleShell, GenericOperator must accept correct argument(s) in constructor method</font> ');
+			exit ();
+		}
+	}
+	
+	/**
 	 *
 	 * {@inheritdoc}
 	 * @see \com\bornayuan\turtleshell\storage\operator\IGenericOperator::getOperatorName()
@@ -61,22 +78,6 @@ abstract class GenericOperator implements IGenericOperator {
 		$this->databaseConnector = $databaseConnector;
 	}
 	
-	/**
-	 * Constructor, this method must accept correct arguments.
-	 *
-	 * @param string $operatorName
-	 * @param \com\bornayuan\turtleshell\storage\database\DatabaseConnector $databaseConnector
-	 */
-	public function __construct() {
-		$argumentCountNumber = func_num_args ();
-		if ($argumentCountNumber == 2) {
-			$this->setOperatorName ( func_get_arg ( 0 ) );
-			$this->setDatabaseConnector ( func_get_arg ( 1 ) );
-		} else {
-			echo (' <font color="#FF0000">TurtleShell, GenericOperator must accept correct argument(s) in constructor method</font> ');
-			exit ();
-		}
-	}
 }
 
 ?>

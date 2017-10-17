@@ -1,13 +1,13 @@
 <?php
 require_once (dirname ( __FILE__ ) . '/ts-configuration.php');
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/StorageManager.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/service/ServiceProvider.php';
 
-use com\bornayuan\turtleshell\storage\StorageManager;
+use com\bornayuan\turtleshell\service\ServiceProvider;
 
-$storage = new StorageManager ();
-$ubEntity = $storage->loadUserBasic ( 1 );
+$service = new ServiceProvider ();
+$ubEntity = $service->loadUserBasic ( 1 );
 
-echo 'StorageManager->loadUserBadic()';
+echo 'ServiceProvider->loadUserBadic()';
 echo '<br />';
 echo 'ID: ' . $ubEntity->getId ();
 echo '<br />';
@@ -22,7 +22,7 @@ echo '<br />';
 
 echo 'StorageManager->signIn()';
 echo '<br />';
-$signInFlag = $storage->signIn ( 'forla', '654321' );
+$signInFlag = $service->signIn ( 'forla', '654321' );
 if ($signInFlag) {
 	echo 'Sign In successfully!';
 	echo '<br />';
