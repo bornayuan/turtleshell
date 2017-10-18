@@ -10,26 +10,19 @@ namespace com\bornayuan\turtleshell\storage\entity;
 interface IGenericEntity {
 	
 	/**
-	 * Get primary key
+	 * Get ID, it is primary key
 	 *
-	 * @return int, primary key
+	 * @return string Primary key
 	 */
 	public function getId();
 	
 	/**
-	 * Set primary key
+	 * Set ID, it is primary key
 	 *
-	 * @param
-	 *        	int, primary key
+	 * @param string $id
+	 *        	Primary key
 	 */
 	public function setId($id);
-	
-	/**
-	 * Get entity name
-	 *
-	 * @return string, entity name
-	 */
-	public function getEntityName();
 }
 
 ?>

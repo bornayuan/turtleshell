@@ -1,30 +1,18 @@
 <?php
 require_once dirname ( __FILE__ ) . '/ts-configuration.php';
+
 require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/StorageService.php';
+
 use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
+use com\bornayuan\turtleshell\storage\StorageService;
 
-$parameters = array (
-		'firstName' => 'Jack',
-		'middleName' => 'Aaron',
-		'lastName' => 'Foth',
-		'nickName' => 'Jack',
-		'email' => 'abc@hotmail.com' 
-);
+$ubEntity = new UserBasicEntity ();
+//$ubEntity->setFirstName ( 'l' );
+$ubEntity->setMiddleName('o');
+//$ubEntity->setEmail ( 'JJ@Hotmail.com' );
 
-$columnKeys = key ( UserBasicEntity::$COLUMN_NAMES );
-
-$keys = array_keys ( $parameters );
-
-var_dump ( $keys );
-var_dump ( UserBasicEntity::$COLUMN_NAMES );
-
-$condition = '';
-
-foreach ( $keys as $key ) {
-	if (array_key_exists ( $key, UserBasicEntity::$COLUMN_NAMES )) {
-		$condition = $condition . ' AND '.UserBasicEntity::$COLUMN_NAMES[$key].' LIKE \'%'.$parameters[$key].'%\' ';
-	}
-}
-
-echo $condition;
+$ss = new StorageService ();
+$ubEntities = $ss->findUserBasicEntities ( $ubEntity );
+var_dump ( $ubEntities );
 ?>

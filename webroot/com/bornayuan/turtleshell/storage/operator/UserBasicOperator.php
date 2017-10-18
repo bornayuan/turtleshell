@@ -2,11 +2,9 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/StorageUtitlity.php';
 require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
 require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
 
-use com\bornayuan\turtleshell\storage\StorageUtility;
 use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
 
 /**
@@ -26,7 +24,7 @@ class UserBasicOperator extends GenericOperator {
 	}
 	
 	/**
-	 * Create UserBasicEntity,
+	 * Create UserBasicEntity
 	 *
 	 * @return \com\bornayuan\turtleshell\storage\entity\UserBasicEntity
 	 */
@@ -41,9 +39,9 @@ class UserBasicOperator extends GenericOperator {
 	/**
 	 * Load single entity by primary key.
 	 *
-	 * @param int $id
-	 *        	primary key
-	 * @return \com\bornayuan\turtleshell\storage\entity\UserBasicEntity
+	 * @param string $id
+	 *        	Primary key
+	 * @return \com\bornayuan\turtleshell\storage\entity\UserBasicEntity|NULL
 	 */
 	public function load($id) {
 		$sql = 'SELECT * FROM TS_USER_BASIC WHERE ID=' . $id;
@@ -60,7 +58,7 @@ class UserBasicOperator extends GenericOperator {
 			if ($rowCountNumber == 1) {
 				$row = mysqli_fetch_assoc ( $result );
 				$ubEntity = new UserBasicEntity ();
-				$ubEntity->setId ( intval ( $row ['id'] ) );
+				$ubEntity->setId ( $row ['id'] );
 				$ubEntity->setFirstName ( $row ['first_name'] );
 				$ubEntity->setMiddleName ( $row ['middle_name'] );
 				$ubEntity->setLastName ( $row ['last_name'] );
@@ -88,14 +86,13 @@ class UserBasicOperator extends GenericOperator {
 	}
 	
 	/**
-	 * Find UserBasicEntity by mutiple conditions.
+	 * Find UserBasicEntity by condition, which should be a formated sql script.
 	 *
-	 * @param string $parameters
-	 * @return array UserBasicEntities
+	 * @param string $condition
+	 * @return array UserBasicEntities|NULL
 	 *        
 	 */
-	public function find($parameters) {
-		$condition = $this->parseParameters ( $parameters );
+	public function find($condition) {
 		$sql = 'SELECT * FROM TS_USER_BASIC WHERE 1=1 ' . $condition;
 		
 		$this->getDatabaseConnector ()->beginTransaction ();
@@ -111,13 +108,13 @@ class UserBasicOperator extends GenericOperator {
 			if (mysqli_num_rows ( $result ) > 0) {
 				$ubEntity = new UserBasicEntity ();
 				while ( $row = mysqli_fetch_assoc ( $result ) ) {
-					$ubEntity->setId ( intval ( $row ['ID'] ) );
-					$ubEntity->setFirstName ( $row ['FIRST_NAME'] );
-					$ubEntity->setMiddleName ( $row ['MIDDLE_NAME'] );
-					$ubEntity->setLastName ( $row ['LAST_NAME'] );
-					$ubEntity->setNickName ( $row ['NICK_NAME'] );
-					$ubEntity->setEmail ( $row ['EMAIL'] );
-					$ubEntity->setUniqueIdentity ( $row ['UNIQUE_IDENTITY'] );
+					$ubEntity->setId ( $row ['id'] );
+					$ubEntity->setFirstName ( $row ['first_name'] );
+					$ubEntity->setMiddleName ( $row ['middle_name'] );
+					$ubEntity->setLastName ( $row ['last_name'] );
+					$ubEntity->setNickName ( $row ['nick_name'] );
+					$ubEntity->setEmail ( $row ['email'] );
+					$ubEntity->setUniqueIdentity ( $row ['unique_identity'] );
 					
 					$ubEntities [] = $ubEntity;
 				}
@@ -135,17 +132,6 @@ class UserBasicOperator extends GenericOperator {
 			 */
 			return null;
 		}
-	}
-	
-	/**
-	 * Parse parameters array to SQL string
-	 *
-	 * @param array $parameters
-	 * @return string parsed SQL condition
-	 */
-	private function parseParameters($parameters) {
-		$condition = StorageUtility::parseParametersWithColumns ( $parameters, UserBasicEntity::$COLUMNS );
-		return $condition;
 	}
 }
 

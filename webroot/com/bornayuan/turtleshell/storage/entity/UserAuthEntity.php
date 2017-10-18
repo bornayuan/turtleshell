@@ -14,9 +14,9 @@ class UserAuthEntity extends GenericEntity {
 	/**
 	 * USER_BASIC_ID, it is primary key of UserBasicEntity and the length is 11.
 	 *
-	 * @var int
+	 * @var string
 	 */
-	private $userBasicId = - 1;
+	private $userBasicId = null;
 	
 	/**
 	 * USERNAME, length is 60.
@@ -49,7 +49,6 @@ class UserAuthEntity extends GenericEntity {
 	/**
 	 */
 	public function __construct() {
-		parent::__construct ( 'UserAuthEntity' );
 	}
 	
 	/**

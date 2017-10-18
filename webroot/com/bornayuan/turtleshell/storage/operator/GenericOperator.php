@@ -2,6 +2,8 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
+use com\bornayuan\turtleshell\storage\database\DatabaseConnector;
+
 require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/IGenericOperator.php';
 
 /**
@@ -35,7 +37,12 @@ abstract class GenericOperator implements IGenericOperator {
 		$argumentCountNumber = func_num_args ();
 		if ($argumentCountNumber == 2) {
 			$this->setOperatorName ( func_get_arg ( 0 ) );
-			$this->setDatabaseConnector ( func_get_arg ( 1 ) );
+			
+			if (func_get_arg ( 1 ) != null) {
+				$this->setDatabaseConnector ( func_get_arg ( 1 ) );
+			} else {
+				$this->setDatabaseConnector ( new DatabaseConnector () );
+			}
 		} else {
 			echo (' <font color="#FF0000">TurtleShell, GenericOperator must accept correct argument(s) in constructor method</font> ');
 			exit ();
@@ -77,7 +84,6 @@ abstract class GenericOperator implements IGenericOperator {
 	public function setDatabaseConnector($databaseConnector) {
 		$this->databaseConnector = $databaseConnector;
 	}
-	
 }
 
 ?>

@@ -10,81 +10,67 @@ require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity
  *        
  */
 class UserBasicEntity extends GenericEntity {
-	/**
-	 * Column names of tale TS_USER_BASIC
-	 *
-	 * @var array
-	 */
-	public static $COLUMNS = array (
-			'id' => 'ID',
-			'firstName' => 'FIRST_NAME',
-			'middleName' => 'MIDDLE_NAME',
-			'lastName' => 'LAST_NAME',
-			'nickName' => 'NICK_NAME',
-			'email' => 'EMAIL',
-			'uniqueIdentity' => 'UNIQUE_IDENTITY'
-	);
 	
 	/**
 	 * FIRST_NAME, length is 60.
 	 *
 	 * @var string
 	 */
-	private $firstName = null;
+	public $firstName = null;
 	
 	/**
 	 * MIDDLE_NAME, length is 60.
 	 *
 	 * @var string
 	 */
-	private $middleName = null;
+	public $middleName = null;
 	
 	/**
 	 * LAST_NAME, length is 60.
 	 *
 	 * @var string
 	 */
-	private $lastName = null;
+	public $lastName = null;
 	
 	/**
 	 * NICK_NAME, length is 60.
 	 *
 	 * @var string
 	 */
-	private $nickName = null;
+	public $nickName = null;
 	
 	/**
 	 * EMAIL, length is 60.
 	 *
 	 * @var string
 	 */
-	private $email = null;
+	public $email = null;
 	
 	/**
 	 * UNIQUE_IDENTITY, length is 60.
 	 *
 	 * @var string
 	 */
-	private $uniqueIdentity = null;
+	public $uniqueIdentity = null;
 	
 	/**
 	 * CREATED_TIMESTAMP, it is only for displaying with format 1900-01-01 11:01:01.
 	 *
 	 * @var string
 	 */
-	private $createdTimestamp = null;
+	public $createdTimestamp = null;
 	
 	/**
 	 * UPDATED_TIMESTAMP, it is only for displaying with format 1900-01-01 11:01:01.
 	 *
 	 * @var string
 	 */
-	private $updatedTimestamp = null;
+	public $updatedTimestamp = null;
 	
 	/**
+	 * Constructor
 	 */
 	public function __construct() {
-		parent::__construct ( 'UserBasicEntity' );
 	}
 	
 	/**
