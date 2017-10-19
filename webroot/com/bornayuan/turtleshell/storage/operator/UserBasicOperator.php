@@ -92,14 +92,12 @@ class UserBasicOperator extends GenericOperator {
 	 * @return array UserBasicEntities|NULL
 	 *        
 	 */
-	public function find($condition) {
-		$sql = 'SELECT * FROM TS_USER_BASIC WHERE 1=1 ' . $condition;
-		
+	public function find($querySql) {
 		$this->getDatabaseConnector ()->beginTransaction ();
-		$result = mysqli_query ( $this->getDatabaseConnector ()->getDatabaseConnection (), $sql );
+		$result = mysqli_query ( $this->getDatabaseConnector ()->getDatabaseConnection (), $querySql );
 		$this->getDatabaseConnector ()->endTransaction ();
 		
-		$ubEntities = array ();
+		$ubEntities = [ ];
 		
 		if ($result) {
 			/*
@@ -107,16 +105,8 @@ class UserBasicOperator extends GenericOperator {
 			 */
 			if (mysqli_num_rows ( $result ) > 0) {
 				$ubEntity = new UserBasicEntity ();
-				while ( $row = mysqli_fetch_assoc ( $result ) ) {
-					$ubEntity->setId ( $row ['id'] );
-					$ubEntity->setFirstName ( $row ['first_name'] );
-					$ubEntity->setMiddleName ( $row ['middle_name'] );
-					$ubEntity->setLastName ( $row ['last_name'] );
-					$ubEntity->setNickName ( $row ['nick_name'] );
-					$ubEntity->setEmail ( $row ['email'] );
-					$ubEntity->setUniqueIdentity ( $row ['unique_identity'] );
-					
-					$ubEntities [] = $ubEntity;
+				while ( $rowData = mysqli_fetch_assoc ( $result ) ) {
+					$ubEntities [] = OperatorUtility::buildEntityFromQueriedRowData ( $ubEntity, $rowData );
 				}
 				
 				return $ubEntities;

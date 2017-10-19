@@ -63,6 +63,51 @@ class UserAuthOperator extends GenericOperator {
 			return null;
 		}
 	}
+	
+	/**
+	 * Find UserAuthEntity by condition, which should be a formated sql script.
+	 *
+	 * @param string $condition
+	 * @return array UserAuthEntities|NULL
+	 *
+	 */
+	public function find($condition) {
+		$sql = 'SELECT * FROM TS_USER_AUTH WHERE 1=1 ' . $condition;
+		
+		$this->getDatabaseConnector ()->beginTransaction ();
+		$result = mysqli_query ( $this->getDatabaseConnector ()->getDatabaseConnection (), $sql );
+		$this->getDatabaseConnector ()->endTransaction ();
+		
+		$uaEntities = array ();
+		
+		if ($result) {
+			/*
+			 * There are results
+			 */
+			if (mysqli_num_rows ( $result ) > 0) {
+				$uaEntity = new UserAuthEntity ();
+				while ( $row = mysqli_fetch_assoc ( $result ) ) {
+					$uaEntity->setId ( $row ['id'] );
+					$uaEntity->setUsername ( $row ['username'] );
+					$ubEntity->setPassword ( $row ['password'] );
+					
+					$uaEntities [] = $uaEntity;
+				}
+				
+				return $uaEntities;
+			} else {
+				/*
+				 * The result is not null/false, but its length is zero. Maybe this scenario will not be happend.
+				 */
+				return null;
+			}
+		} else {
+			/*
+			 * There is no result.
+			 */
+			return null;
+		}
+	}
 }
 
 ?>

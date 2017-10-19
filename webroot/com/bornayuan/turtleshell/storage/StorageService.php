@@ -43,9 +43,9 @@ class StorageService {
 	 * @return array UserBasicEntities
 	 */
 	public function findUserBasicEntities($ubEntity) {
-		$condition = OperatorUtility::buildCondition ( $ubEntity );
+		$querySql = OperatorUtility::parseEntityToSqlForQuerying($ubEntity);
 		$ubOperator = new UserBasicOperator ( null );
-		$ubEntities = $ubOperator->find ( $condition );
+		$ubEntities = $ubOperator->find ( $querySql );
 		
 		return $ubEntities;
 	}

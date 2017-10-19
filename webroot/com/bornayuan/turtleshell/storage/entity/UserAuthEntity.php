@@ -2,7 +2,7 @@
 
 namespace com\bornayuan\turtleshell\storage\entity;
 
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity/GenericEntity.php';
+require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/GenericEntity.php';
 
 /**
  *
