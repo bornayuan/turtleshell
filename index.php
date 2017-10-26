@@ -17,6 +17,8 @@
 			<a href="/local-test03.php">Local Test 03</a><br />
 			<a href="/local-test04.php">Local Test 04</a><br />
 			<a href="/local-test05.php">Local Test 05</a><br />
+			<a href="/local-test06.php">Local Test 06</a><br />
+
 			<a href="/sign-in.php">Sign In</a><br />
 		</p>
 	</div>

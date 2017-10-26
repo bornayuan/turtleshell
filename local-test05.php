@@ -22,6 +22,10 @@ $xmlMapperPaths = [
 		dirname ( __FILE__ ) . '/lib/com/bornayuan/turtleshell/storage/mapper'
 ];
 
+
+
+
+
 $doctrineConfiguration = Setup::createXMLMetadataConfiguration ( $xmlMapperPaths, $isDevMode );
 $entityManager = EntityManager::create ( $databaseConfiguration, $doctrineConfiguration );
 
