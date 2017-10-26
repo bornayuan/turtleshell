@@ -1,7 +1,5 @@
 <?php
-require (dirname ( __FILE__ ) . '/ts-configuration.php');
-
-require constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/template/TemplateGenerator.php';
+require dirname ( __FILE__ ) . '/vendor/autoload.php';
 
 use com\bornayuan\turtleshell\template\TemplateGenerator;
 

@@ -2,10 +2,7 @@
 
 namespace com\bornayuan\turtleshell\template;
 
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/template/element/Header.php';
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/template/element/Container.php';
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/template/element/Footer.php';
-
+use com\bornayuan\turtleshell\ConfigurationManager;
 use com\bornayuan\turtleshell\template\element\Container;
 use com\bornayuan\turtleshell\template\element\Footer;
 use com\bornayuan\turtleshell\template\element\Header;
@@ -29,13 +26,13 @@ class TemplateGenerator {
 	 */
 	public function getSignInTemplate() {
 		$header = new Header ();
-		$headerContent = $header->getHeader ( TS__TEMPLATE__SIGN_IN );
+		$headerContent = $header->getHeader ( ConfigurationManager::$TS__TEMPLATE__SIGN_IN );
 		
 		$container = new Container ();
-		$containerContent = $container->getContainer ( TS__TEMPLATE__SIGN_IN );
+		$containerContent = $container->getContainer ( ConfigurationManager::$TS__TEMPLATE__SIGN_IN );
 		
 		$footer = new Footer ();
-		$footerContent = $footer->getFooter ( TS__TEMPLATE__SIGN_IN );
+		$footerContent = $footer->getFooter ( ConfigurationManager::$TS__TEMPLATE__SIGN_IN );
 		
 		return $headerContent . $containerContent . $footerContent;
 	}

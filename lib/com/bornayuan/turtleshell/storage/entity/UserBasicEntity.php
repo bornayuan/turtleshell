@@ -2,8 +2,6 @@
 
 namespace com\bornayuan\turtleshell\storage\entity;
 
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/GenericEntity.php';
-
 /**
  *
  * @author borna

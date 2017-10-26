@@ -6,13 +6,17 @@
 </head>
 <body>
 
-	<div style="width: 100%; height: 200px; text-align: center">
+	<div id="mainPanel" style="width: 100%; height: 200px; text-align: center">
 		<p>
 			<font size="10"><strong>TurtleShell</strong></font><br />
 			<a href="/online-test01.php">Online Test 01 (Basic Function Test)</a><br />
 			<a href="/online-test02.php">Online Test 02 (Database Function Test)</a><br />
+			<br />
 			<a href="/local-test01.php">Local Test 01</a><br />
 			<a href="/local-test02.php">Local Test 02</a><br />
+			<a href="/local-test03.php">Local Test 03</a><br />
+			<a href="/local-test04.php">Local Test 04</a><br />
+			<a href="/local-test05.php">Local Test 05</a><br />
 			<a href="/sign-in.php">Sign In</a><br />
 		</p>
 	</div>

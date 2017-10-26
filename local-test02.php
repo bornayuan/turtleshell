@@ -1,8 +1,5 @@
 <?php
-require_once dirname ( __FILE__ ) . '/ts-configuration.php';
-
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/StorageService.php';
+require dirname ( __FILE__ ) . '/vendor/autoload.php';
 
 use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
 use com\bornayuan\turtleshell\storage\StorageService;

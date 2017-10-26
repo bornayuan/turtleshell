@@ -1,6 +1,5 @@
 <?php
-require_once (dirname ( __FILE__ ) . '/ts-configuration.php');
-require_once ABSPATH . '/com/bornayuan/turtleshell/service/ServiceProvider.php';
+require dirname ( __FILE__ ) . '/vendor/autoload.php';
 
 use com\bornayuan\turtleshell\service\ServiceProvider;
 

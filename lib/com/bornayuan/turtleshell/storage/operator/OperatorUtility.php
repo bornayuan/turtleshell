@@ -2,10 +2,9 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/EntityUtility.php';
-
 use com\bornayuan\turtleshell\storage\entity\EntityUtility;
 use ReflectionClass;
+use ReflectionMethod;
 
 /**
  *
@@ -53,10 +52,11 @@ class OperatorUtility {
 	 * @return \com\bornayuan\turtleshell\storage\entity\IGenericEntity
 	 */
 	public static function buildEntityFromQueriedRowData($igEntity, $rowData) {
-		$reflect = new ReflectionClass ( $igEntity );
-		$pcMapping = EntityUtility::getPropertyColumnMapping ( $igEntity );
-		foreach ( $pcMapping as $key => $value ) {
-			$reflect->getProperty ( $key )->setValue ( $igEntity, $rowData [$value] );
+		$rMethod = new ReflectionMethod ( $igEntity );
+		$columnNames = EntityUtility::getColumnNames ( $igEntity );
+		foreach ( $columnNames as $columnName ) {
+			$writeMethodName = EntityUtility::getWriteMethodName ( $columnName );
+			$rMethod->invoke ( $igEntity, $writeMethodName, $rowData [$value] );
 		}
 		return $igEntity;
 	}

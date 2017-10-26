@@ -2,6 +2,7 @@
 
 namespace com\bornayuan\turtleshell\storage\database;
 
+use com\bornayuan\turtleshell\ConfigurationManager;
 use Exception;
 
 /**
@@ -101,12 +102,12 @@ class DatabaseConnector {
 		/*
 		 * Initialize database configuration with default values.
 		 */
-		$this->setDatabaseServer ( DATABASE_SERVER );
-		$this->setDatabasePort ( DATABASE_PORT );
-		$this->setDatabaseName ( DATABASE_NAME );
-		$this->setDatabaseUsername ( DATABASE_USERNAME );
-		$this->setDatabasePassword ( DATABASE_PASSWORD );
-		$this->setDatabaseCharset ( DATABASE_CHARSET );
+		$this->setDatabaseServer ( ConfigurationManager::$DATABASE_SERVER );
+		$this->setDatabasePort ( ConfigurationManager::$DATABASE_PORT );
+		$this->setDatabaseName ( ConfigurationManager::$DATABASE_NAME );
+		$this->setDatabaseUsername ( ConfigurationManager::$DATABASE_USERNAME );
+		$this->setDatabasePassword ( ConfigurationManager::$DATABASE_PASSWORD );
+		$this->setDatabaseCharset ( ConfigurationManager::$DATABASE_CHARSET );
 		
 		/*
 		 * Check the argument(s)

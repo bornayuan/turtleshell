@@ -2,9 +2,6 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserAuthEntity.php';
-
 use com\bornayuan\turtleshell\storage\entity\UserAuthEntity;
 
 /**
@@ -69,7 +66,7 @@ class UserAuthOperator extends GenericOperator {
 	 *
 	 * @param string $condition
 	 * @return array UserAuthEntities|NULL
-	 *
+	 *        
 	 */
 	public function find($condition) {
 		$sql = 'SELECT * FROM TS_USER_AUTH WHERE 1=1 ' . $condition;

@@ -4,8 +4,6 @@ namespace com\bornayuan\turtleshell\storage\operator;
 
 use com\bornayuan\turtleshell\storage\database\DatabaseConnector;
 
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/operator/IGenericOperator.php';
-
 /**
  *
  * @author borna

@@ -2,9 +2,6 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/GenericOperator.php';
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
-
 use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
 
 /**

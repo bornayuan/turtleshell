@@ -2,12 +2,10 @@
 
 namespace com\bornayuan\turtleshell\storage\entity;
 
-require_once constant ( 'ABSPATH' ) . '/com/bornayuan/turtleshell/storage/entity/IGenericEntity.php';
-
 /**
  *
  * @author borna
- *        
+ *         
  */
 abstract class GenericEntity implements IGenericEntity {
 	
@@ -28,7 +26,7 @@ abstract class GenericEntity implements IGenericEntity {
 	 * {@inheritdoc}
 	 * @see \com\bornayuan\turtleshell\storage\entity\IGenericEntity::getId()
 	 */
-	public final function getId() {
+	public function getId() {
 		return $this->id;
 	}
 	
@@ -37,7 +35,7 @@ abstract class GenericEntity implements IGenericEntity {
 	 * {@inheritdoc}
 	 * @see \com\bornayuan\turtleshell\storage\entity\IGenericEntity::setId()
 	 */
-	public final function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 	}
 }

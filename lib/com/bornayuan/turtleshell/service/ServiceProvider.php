@@ -2,11 +2,7 @@
 
 namespace com\bornayuan\turtleshell\service;
 
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/database/DatabaseConnector.php';
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/entity/UserBasicEntity.php';
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/UserAuthOperator.php';
-require_once ABSPATH . '/com/bornayuan/turtleshell/storage/operator/UserBasicOperator.php';
-
+use com\bornayuan\turtleshell\ConfigurationManager;
 use com\bornayuan\turtleshell\storage\database\DatabaseConnector;
 use com\bornayuan\turtleshell\storage\operator\UserAuthOperator;
 use com\bornayuan\turtleshell\storage\operator\UserBasicOperator;
@@ -86,7 +82,7 @@ class ServiceProvider {
 			 */
 			if ($ubEntity != null && $ubEntity->getId () > 0) {
 				session_start ();
-				$_SESSION [TS__SESSION__SIGN_IN] = true;
+				$_SESSION [ConfigurationManager::$TS__SESSION__SIGN_IN] = true;
 				$SIGNED_USER_BASIC = $ubEntity;
 				return true;
 			} else {

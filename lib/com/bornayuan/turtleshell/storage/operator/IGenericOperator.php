@@ -2,6 +2,8 @@
 
 namespace com\bornayuan\turtleshell\storage\operator;
 
+use com\bornayuan\turtleshell\storage\database\DatabaseConnector;
+
 /**
  *
  * @author borna
@@ -19,14 +21,15 @@ interface IGenericOperator {
 	/**
 	 * Get DatabaseConnector.
 	 *
-	 * @return \com\bornayuan\turtleshell\storage\database\DatabaseConnector
+	 * @return DatabaseConnector
 	 */
 	public function getDatabaseConnector();
 	
 	/**
 	 * Set DatabaseConnector
 	 *
-	 * @param \com\bornayuan\turtleshell\storage\database\DatabaseConnector
+	 * @param
+	 *        	\com\bornayuan\turtleshell\storage\database\DatabaseConnector
 	 */
 	public function setDatabaseConnector($databaseConnector);
 }
