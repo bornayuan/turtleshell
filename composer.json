@@ -1,0 +1,28 @@
+{
+	"name" : "bornayuan/turtleshell",
+	"description" : "turtlesheel",
+	"require" : {
+		"doctrine/orm" : "2.4.*",
+		"symfony/yaml" : "2.*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"" : "lib"
+		}
+	},
+	"type" : "project",
+	"license" : "MIT",
+	"minimum-stability" : "alpha",
+	"keywords" : [
+		"php",
+		"bornayuan",
+		"turtleshell"
+	],
+	"authors" : [{
+			"name" : "Borna Yuan",
+			"email" : "by@bornayuan.com",
+			"homepage" : "http://www.bornayuan.com",
+			"role" : "Owner"
+		}
+	]
+}
