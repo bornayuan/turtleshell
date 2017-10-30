@@ -36,7 +36,7 @@ $cmf = new DisconnectedClassMetadataFactory ();
 $cmf->setEntityManager ( $entityManager );
 $metadata = $cmf->getAllMetadata ();
 $cme = new ClassMetadataExporter ();
-$exporter = $cme->getExporter ( 'xml', '/lib' );
+$exporter = $cme->getExporter ( 'xml', dirname ( __FILE__ ) . '/lib/com/bornayuan/turtleshell/storage/mapper' );
 $exporter->setMetadata ( $metadata );
 $exporter->export ();
 ?>

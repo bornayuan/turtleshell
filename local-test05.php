@@ -4,7 +4,7 @@ require dirname ( __FILE__ ) . '/vendor/autoload.php';
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use com\bornayuan\turtleshell\ConfigurationManager;
-use com\bornayuan\turtleshell\storage\entity\UserAddressEntity;
+use com\bornayuan\turtleshell\storage\entity\UserBasicEntity;
 
 $isDevMode = true;
 
@@ -30,16 +30,16 @@ $doctrineConfiguration = Setup::createXMLMetadataConfiguration ( $xmlMapperPaths
 $entityManager = EntityManager::create ( $databaseConfiguration, $doctrineConfiguration );
 
 
-$uaEntity = new UserAddressEntity ();
-$uaEntity ->setId(1);
-$uaEntity->setLabel ( 'HomeAddress'. date('ymdhis') );
-$entityManager->persist ( $uaEntity );
-$entityManager->flush ();
-echo 'Persist Operation: UserAddressEntity id=' . $uaEntity->getId() . ', lable=' . $uaEntity->getLabel() . '<br />';
+$ubEntity = new UserBasicEntity();
+// $ubEntity ->setId(1);
+// $ubEntity->setFirstName( 'Allen' );
+// $entityManager->persist ( $ubEntity );
+// $entityManager->flush ();
+// echo 'Persist Operation: UserAddressEntity id=' . $uaEntity->getId() . ', lable=' . $uaEntity->getLabel() . '<br />';
 
-$uaEntity = $entityManager->find('com\bornayuan\turtleshell\storage\entity\UserAddressEntity', 1);
+$ubEntity = $entityManager->find('com\bornayuan\turtleshell\storage\entity\UserBasicEntity', 1);
 $entityManager->flush ();
 
-echo 'Find Operation: UserAddressEntity id=' . $uaEntity->getId() . ', lable=' . $uaEntity->getLabel() . '<br />';
+echo 'Find Operation: UserBasicEntity id=' . $ubEntity->getId() . ', lable=' . $ubEntity->getFirstName() . '<br />';
 
 ?>

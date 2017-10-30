@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="TsUserBasic" table="ts_user_basic">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="firstName" type="string" column="first_name" length="60" nullable="true"/>
+    <field name="middleName" type="string" column="middle_name" length="60" nullable="true"/>
+    <field name="lastName" type="string" column="last_name" length="60" nullable="true"/>
+    <field name="nickName" type="string" column="nick_name" length="60" nullable="true"/>
+    <field name="gender" type="integer" column="gender" nullable="true"/>
+    <field name="email" type="string" column="email" length="60" nullable="true"/>
+    <field name="uniqueIdentity" type="string" column="unique_identity" length="60" nullable="false"/>
+    <field name="createdTimestamp" type="datetime" column="created_timestamp" nullable="false"/>
+    <field name="updatedTimestamp" type="datetime" column="updated_timestamp" nullable="true"/>
+  </entity>
+</doctrine-mapping>
