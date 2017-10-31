@@ -1,8 +1,8 @@
 <?php
 require dirname ( __FILE__ ) . '/vendor/autoload.php';
 
-print ('TurtleShell Online Test 01') ;
+print ('TurtleShell Online Test 01<br />') ;
 
-echo dirname ( __FILE__ ) ;
+echo $_SERVER['DOCUMENT_ROOT'] ;
 
 ?>
