@@ -23,9 +23,30 @@ class ConfigurationManager {
 	public static $DATABASE_FLAG = 0;
 	
 	/**
-	 * Database configuration array
+	 * $DATABASE_CONFIGURATION
+	 * @var array
 	 */
 	private static $DATABASE_CONFIGURATION = null;
+	
+	/**
+	 * $DOCUMENT_ROOT_PATH
+	 * @var string
+	 */
+	private static $DOCUMENT_ROOT_PATH = null;
+	
+	/**
+	 * Mapper file path
+	 *
+	 * @var string
+	 */
+	private static $MAPPER_FILE_PATH = '/lib/com/bornayuan/turtleshell/storage/mapper';
+	
+	/**
+	 * Entity file path
+	 *
+	 * @var string
+	 */
+	private static $ENTITY_FILE_PATH = '/lib/com/bornayuan/turtleshell/storage/mapper';
 	
 	/**
 	 * Version Number
@@ -50,24 +71,38 @@ class ConfigurationManager {
 	 * @var string, session variable name
 	 */
 	public static $TS__SESSION__SIGN_IN = 'TS__SESSION__SIGN_IN';
+
 	
 	/**
-	 * Mapper file path
-	 * 
-	 * @var string
-	 */
-	private static $MAPPER_FILE_PATH = null;
-	
-	/**
-	 * Entity file path
-	 * 
-	 * @var string
-	 */
-	private static $ENTITY_FILE_PATH = null;
-	
-	/**
+	 * Constructor
 	 */
 	private function __construct() {
+	}
+	
+	/**
+	 * Initialize
+	 */
+	private static function initialize() {
+		/*
+		 * Initialize $DATABASE_CONFIGURATION
+		 */
+		if (self::$DATABASE_CONFIGURATION == null) {
+			self::$DATABASE_CONFIGURATION = [
+					'driver' => self::$DATABASE_DRIVER,
+					'host' => self::$DATABASE_SERVER,
+					'charset' => self::$DATABASE_CHARSET,
+					'user' => self::$DATABASE_USERNAME,
+					'password' => self::$DATABASE_PASSWORD,
+					'dbname' => self::$DATABASE_NAME
+			];
+		}
+		
+		/*
+		 * Initialize $DOCUMENT_ROOT_PATH
+		 */
+		if (self::$DOCUMENT_ROOT_PATH == null) {
+			self::$DOCUMENT_ROOT_PATH = $_SERVER['DOCUMENT_ROOT'];
+		}
 	}
 	
 	/**
@@ -76,17 +111,7 @@ class ConfigurationManager {
 	 * @return array
 	 */
 	public static function getDatabaseConfiguration() {
-		if (self::$DATABASE_CONFIGURATION == null) {
-			
-			self::$DATABASE_CONFIGURATION = [ 
-					'driver' => self::$DATABASE_DRIVER,
-					'host' => self::$DATABASE_SERVER,
-					'charset' => self::$DATABASE_CHARSET,
-					'user' => self::$DATABASE_USERNAME,
-					'password' => self::$DATABASE_PASSWORD,
-					'dbname' => self::$DATABASE_NAME 
-			];
-		}
+		self::initialize();
 		
 		return self::$DATABASE_CONFIGURATION;
 	}
@@ -97,11 +122,9 @@ class ConfigurationManager {
 	 * @return string
 	 */
 	public static function getMapperFilePath() {
-		if (self::$MAPPER_FILE_PATH == null) {
-			self::$MAPPER_FILE_PATH = $_SERVER['DOCUMENT_ROOT'] . '/lib/com/bornayuan/turtleshell/storage/mapper';
-		}
+		self::initialize();
 		
-		return self::$MAPPER_FILE_PATH;
+		return self::$DOCUMENT_ROOT_PATH . self::$MAPPER_FILE_PATH;
 	}
 	
 	/**
@@ -110,11 +133,9 @@ class ConfigurationManager {
 	 * @return string
 	 */
 	public static function getEntityFilePath() {
-		if (self::$ENTITY_FILE_PATH == null) {
-			self::$ENTITY_FILE_PATH = $_SERVER['DOCUMENT_ROOT'] . '/lib/com/bornayuan/turtleshell/storage/mapper';
-		}
+		self::initialize();
 		
-		return self::$ENTITY_FILE_PATH;
+		return self::$DOCUMENT_ROOT_PATH . self::$ENTITY_FILE_PATH;
 	}
 }
 
