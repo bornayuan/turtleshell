@@ -1,51 +1,46 @@
 <?php
-
-
-
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * TsArticleCategory
  *
- * @ORM\Table(name="ts_article_category")
- * @ORM\Entity
+ * @Doctrine\ORM\Mapping\Table(name="ts_article_category")
+ * @Doctrine\ORM\Mapping\Entity
  */
 class TsArticleCategory
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Doctrine\ORM\Mapping\Column(name="id", type="integer", nullable=false)
+     * @Doctrine\ORM\Mapping\Id
+     * @Doctrine\ORM\Mapping\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=60, nullable=false)
+     * @Doctrine\ORM\Mapping\Column(name="name", type="string", length=60, nullable=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=200, nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="description", type="string", length=200, nullable=true)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
+     * @Doctrine\ORM\Mapping\Column(name="created_timestamp", type="datetime", nullable=false)
      */
     private $createdTimestamp;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_timestamp", type="datetime", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="updated_timestamp", type="datetime", nullable=true)
      */
     private $updatedTimestamp;
 

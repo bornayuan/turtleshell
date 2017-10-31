@@ -2,59 +2,58 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TsUserAuth
  *
- * @ORM\Table(name="ts_user_auth", indexes={@ORM\Index(name="USER_BASIC_ID", columns={"user_basic_id"})})
- * @ORM\Entity
+ * @Doctrine\ORM\Mapping\Table(name="ts_user_auth", indexes={@ORM\Index(name="USER_BASIC_ID", columns={"user_basic_id"})})
+ * @Doctrine\ORM\Mapping\Entity
  */
 class TsUserAuth
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Doctrine\ORM\Mapping\Column(name="id", type="integer", nullable=false)
+     * @Doctrine\ORM\Mapping\Id
+     * @Doctrine\ORM\Mapping\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=60, nullable=false)
+     * @Doctrine\ORM\Mapping\Column(name="username", type="string", length=60, nullable=false)
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=60, nullable=false)
+     * @Doctrine\ORM\Mapping\Column(name="password", type="string", length=60, nullable=false)
      */
     private $password;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
+     * @Doctrine\ORM\Mapping\Column(name="created_timestamp", type="datetime", nullable=false)
      */
     private $createdTimestamp;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_timestamp", type="datetime", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="updated_timestamp", type="datetime", nullable=true)
      */
     private $updatedTimestamp;
 
     /**
      * @var \TsUserBasic
      *
-     * @ORM\ManyToOne(targetEntity="TsUserBasic")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_basic_id", referencedColumnName="id")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="TsUserBasic")
+     * @Doctrine\ORM\Mapping\JoinColumns({
+     *   @Doctrine\ORM\Mapping\JoinColumn(name="user_basic_id", referencedColumnName="id")
      * })
      */
     private $userBasic;

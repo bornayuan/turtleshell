@@ -2,85 +2,84 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TsUserBasic
  *
- * @ORM\Table(name="ts_user_basic")
- * @ORM\Entity
+ * @Doctrine\ORM\Mapping\Table(name="ts_user_basic")
+ * @Doctrine\ORM\Mapping\Entity
  */
 class TsUserBasic
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Doctrine\ORM\Mapping\Column(name="id", type="integer", nullable=false)
+     * @Doctrine\ORM\Mapping\Id
+     * @Doctrine\ORM\Mapping\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=60, nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="first_name", type="string", length=60, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="middle_name", type="string", length=60, nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="middle_name", type="string", length=60, nullable=true)
      */
     private $middleName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=60, nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="last_name", type="string", length=60, nullable=true)
      */
     private $lastName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nick_name", type="string", length=60, nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="nick_name", type="string", length=60, nullable=true)
      */
     private $nickName;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="gender", type="integer", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="gender", type="integer", nullable=true)
      */
     private $gender;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=60, nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="email", type="string", length=60, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="unique_identity", type="string", length=60, nullable=false)
+     * @Doctrine\ORM\Mapping\Column(name="unique_identity", type="string", length=60, nullable=false)
      */
     private $uniqueIdentity;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
+     * @Doctrine\ORM\Mapping\Column(name="created_timestamp", type="datetime", nullable=false)
      */
     private $createdTimestamp;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_timestamp", type="datetime", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(name="updated_timestamp", type="datetime", nullable=true)
      */
     private $updatedTimestamp;
 
